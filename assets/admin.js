@@ -799,13 +799,108 @@
       `;
     },
 
-    routerDashboard() { return `<div class="row g-3 mb-3"><div class="col-lg-8"><div class="chart-card"><h5>Router Overview</h5><p class="text-muted">Monitor connected routers, CPU load, and network health.</p><canvas class="chart-canvas" id="routerCpuChart"></canvas></div></div><div class="col-lg-4"><div class="panel-card card"><div class="card-body"><h5>Connected Routers</h5><div class="stat-card mb-2"><span>Online</span><strong>3</strong></div><div class="stat-card mb-2"><span>Offline</span><strong>0</strong></div><div class="stat-card"><span>Total</span><strong>3</strong></div></div></div></div></div>`; },
-    bandwidth() { return `<div class="row g-3 mb-3"><div class="col-lg-12"><div class="chart-card"><h5>Bandwidth Usage</h5><p class="text-muted">Real-time bandwidth consumption across all interfaces.</p><canvas class="chart-canvas" id="bandwidthChart"></canvas></div></div></div><div class="row g-3"><div class="col-md-6"><div class="stat-card"><span>Download</span><strong>245 Mbps</strong></div></div><div class="col-md-6"><div class="stat-card"><span>Upload</span><strong>89 Mbps</strong></div></div></div>`; },
-    topUsers() { return `<div class="row g-3 mb-3"><div class="col-lg-12"><div class="panel-card card"><div class="card-body"><h5>Top Data Users</h5><p class="text-muted">Users with the highest data consumption this period.</p><div class="table-responsive"><table class="table"><thead><tr><th>#</th><th>User</th><th>Download</th><th>Upload</th><th>Total</th></tr></thead><tbody><tr><td>1</td><td>User-001</td><td>45.2 GB</td><td>12.8 GB</td><td>58.0 GB</td></tr><tr><td>2</td><td>User-002</td><td>32.1 GB</td><td>8.4 GB</td><td>40.5 GB</td></tr><tr><td>3</td><td>User-003</td><td>28.7 GB</td><td>6.2 GB</td><td>34.9 GB</td></tr><tr><td>4</td><td>User-004</td><td>21.3 GB</td><td>5.1 GB</td><td>26.4 GB</td></tr><tr><td>5</td><td>User-005</td><td>18.9 GB</td><td>4.7 GB</td><td>23.6 GB</td></tr></tbody></table></div></div></div></div></div>`; },
-    remoteAccess() { return `<div class="row g-3 mb-3"><div class="col-lg-12"><div class="panel-card card"><div class="card-body"><h5>Remote Access</h5><p class="text-muted">Securely manage your network from anywhere.</p><div class="row g-3"><div class="col-md-6"><div class="stat-card"><span>Active Sessions</span><strong>2</strong></div></div><div class="col-md-6"><div class="stat-card"><span>API Keys</span><strong>4</strong></div></div></div><hr><button class="btn btn-primary"><i class="bi bi-plus-circle"></i> New Remote Session</button></div></div></div></div>`; },
-    pppoe() { return `<div class="toolbar"><h5>PPPoE Users</h5><div class="filters"><button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add User</button></div></div><div class="panel-card card"><div class="card-body"><div class="table-responsive"><table class="table"><thead><tr><th>Username</th><th>Status</th><th>Speed</th><th>Data Cap</th><th>IP Address</th></tr></thead><tbody><tr><td>user-001</td><td><span class="badge-soft-success">Active</span></td><td>10 Mbps</td><td>Unlimited</td><td>192.168.1.101</td></tr><tr><td>user-002</td><td><span class="badge-soft-success">Active</span></td><td>5 Mbps</td><td>50 GB</td><td>192.168.1.102</td></tr><tr><td>user-003</td><td><span class="badge-soft-muted">Disabled</span></td><td>2 Mbps</td><td>10 GB</td><td>-</td></tr></tbody></table></div></div></div></div>`; },
-    mobileMoney() { return `<div class="row g-3 mb-3"><div class="col-lg-8"><div class="panel-card card"><div class="card-body"><h5>Mobile Money Transactions</h5><div class="table-responsive"><table class="table"><thead><tr><th>Receipt</th><th>Amount</th><th>Provider</th><th>Status</th><th>Date</th></tr></thead><tbody><tr><td>MM-001</td><td>5,000 UGX</td><td>MTN</td><td><span class="badge-soft-success">Completed</span></td><td>Today</td></tr><tr><td>MM-002</td><td>20,000 UGX</td><td>Airtel</td><td><span class="badge-soft-success">Completed</span></td><td>Today</td></tr><tr><td>MM-003</td><td>1,000 UGX</td><td>MTN</td><td><span class="badge-soft-warning">Pending</span></td><td>Today</td></tr></tbody></table></div></div></div></div><div class="col-lg-4"><div class="stat-card mb-2"><span>Today's Collections</span><strong>26,000 UGX</strong></div><div class="stat-card"><span>This Month</span><strong>1,240,000 UGX</strong></div></div></div></div>`; },
-    agents() { return `<div class="toolbar"><h5>Agent POS</h5><div class="filters"><button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add Agent</button></div></div><div class="row g-3 mb-3"><div class="col-md-3"><div class="stat-card"><span>Active Agents</span><strong>8</strong></div></div><div class="col-md-3"><div class="stat-card"><span>Today's Sales</span><strong>125,000 UGX</strong></div></div><div class="col-md-3"><div class="stat-card"><span>Commission</span><strong>12,500 UGX</strong></div></div><div class="col-md-3"><div class="stat-card"><span>Vouchers Sold</span><strong>42</strong></div></div></div><div class="panel-card card"><div class="card-body"><div class="table-responsive"><table class="table"><thead><tr><th>Agent</th><th>Phone</th><th>Sales Today</th><th>Commission</th><th>Status</th></tr></thead><tbody><tr><td>Grace N.</td><td>0709928840</td><td>45,000 UGX</td><td>4,500 UGX</td><td><span class="badge-soft-success">Active</span></td></tr><tr><td>Daniel K.</td><td>0709928841</td><td>32,000 UGX</td><td>3,200 UGX</td><td><span class="badge-soft-success">Active</span></td></tr><tr><td>Stella A.</td><td>0709928842</td><td>48,000 UGX</td><td>4,800 UGX</td><td><span class="badge-soft-success">Active</span></td></tr></tbody></table></div></div></div></div>`; },
+    routerDashboard() {
+      return \`
+        <div class="row g-3 mb-3">
+          <div class="col-md-3"><div class="stat-card"><span>Routers Online</span><strong>3</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Routers Offline</span><strong>0</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Avg CPU Load</span><strong>34%</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Uptime</span><strong>99.8%</strong></div></div>
+        </div>
+        <div class="row g-3 mb-3">
+          <div class="col-lg-8"><div class="chart-card"><h5>Router CPU & Memory Usage</h5><canvas class="chart-canvas" id="routerCpuChart"></canvas></div></div>
+          <div class="col-lg-4">
+            <div class="panel-card card"><div class="card-body"><h5>Connected Routers</h5><div class="table-responsive"><table class="table"><thead><tr><th>Name</th><th>IP</th><th>Load</th></tr></thead><tbody><tr><td>MikroTik-Main</td><td>10.0.0.1</td><td><span class="badge-soft-success">42%</span></td></tr><tr><td>Ruijie-Office</td><td>10.0.0.2</td><td><span class="badge-soft-info">28%</span></td></tr><tr><td>TPLink-Guest</td><td>10.0.0.3</td><td><span class="badge-soft-success">18%</span></td></tr></tbody></table></div></div></div></div>
+          </div>
+        </div>
+      \`;
+    },
+    bandwidth() {
+      return \`
+        <div class="row g-3 mb-3">
+          <div class="col-md-3"><div class="stat-card"><span>Download</span><strong>245 Mbps</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Upload</span><strong>89 Mbps</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Peak Usage</span><strong>312 Mbps</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Total Today</span><strong>142 GB</strong></div></div>
+        </div>
+        <div class="row g-3 mb-3">
+          <div class="col-lg-12"><div class="chart-card"><h5>Bandwidth Usage <span class="text-muted small fw-normal">Last 24 hours</span></h5><canvas class="chart-canvas" id="bandwidthChart"></canvas></div></div>
+        </div>
+        <div class="panel-card card"><div class="card-body"><h5>Interface Usage</h5><div class="table-responsive"><table class="table"><thead><tr><th>Interface</th><th>Download</th><th>Upload</th><th>Clients</th><th>Status</th></tr></thead><tbody><tr><td>WAN1 (Fibre)</td><td>145 Mbps</td><td>52 Mbps</td><td>48</td><td><span class="badge-soft-success">Active</span></td></tr><tr><td>WAN2 (LTE)</td><td>68 Mbps</td><td>24 Mbps</td><td>22</td><td><span class="badge-soft-success">Active</span></td></tr><tr><td>VLAN-Guest</td><td>32 Mbps</td><td>13 Mbps</td><td>15</td><td><span class="badge-soft-success">Active</span></td></tr></tbody></table></div></div></div></div>
+      \`;
+    },
+    topUsers() {
+      return \`
+        <div class="row g-3 mb-3">
+          <div class="col-md-4"><div class="stat-card"><span>Total Users</span><strong>156</strong></div></div>
+          <div class="col-md-4"><div class="stat-card"><span>Active Today</span><strong>89</strong></div></div>
+          <div class="col-md-4"><div class="stat-card"><span>Total Data Used</span><strong>1.2 TB</strong></div></div>
+        </div>
+        <div class="panel-card card"><div class="card-body"><h5>Top Data Users <span class="text-muted small fw-normal">This month</span></h5><div class="table-responsive"><table class="table"><thead><tr><th>#</th><th>Username</th><th>Download</th><th>Upload</th><th>Total</th><th>Plan</th></tr></thead><tbody><tr><td>1</td><td>john.m</td><td>145.2 GB</td><td>32.8 GB</td><td><strong>178.0 GB</strong></td><td>Monthly</td></tr><tr><td>2</td><td>sarah.k</td><td>98.1 GB</td><td>24.4 GB</td><td><strong>122.5 GB</strong></td><td>Monthly</td></tr><tr><td>3</td><td>peter.w</td><td>72.7 GB</td><td>18.2 GB</td><td><strong>90.9 GB</strong></td><td>Weekly</td></tr><tr><td>4</td><td>grace.n</td><td>65.3 GB</td><td>15.1 GB</td><td><strong>80.4 GB</strong></td><td>Monthly</td></tr><tr><td>5</td><td>daniel.k</td><td>58.9 GB</td><td>12.7 GB</td><td><strong>71.6 GB</strong></td><td>Weekly</td></tr><tr><td>6</td><td>stella.a</td><td>51.4 GB</td><td>9.8 GB</td><td><strong>61.2 GB</strong></td><td>Daily</td></tr><tr><td>7</td><td>amos.t</td><td>44.6 GB</td><td>8.3 GB</td><td><strong>52.9 GB</strong></td><td>Weekly</td></tr><tr><td>8</td><td>faith.l</td><td>38.2 GB</td><td>6.5 GB</td><td><strong>44.7 GB</strong></td><td>Daily</td></tr><tr><td>9</td><td>david.o</td><td>32.7 GB</td><td>5.2 GB</td><td><strong>37.9 GB</strong></td><td>Monthly</td></tr><tr><td>10</td><td>esther.a</td><td>28.1 GB</td><td>4.1 GB</td><td><strong>32.2 GB</strong></td><td>Daily</td></tr></tbody></table></div></div></div></div>
+      \`;
+    },
+    remoteAccess() {
+      return \`
+        <div class="row g-3 mb-3">
+          <div class="col-md-3"><div class="stat-card"><span>Active Sessions</span><strong>2</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>API Keys</span><strong>4</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Today's Logins</span><strong>7</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Last Access</span><strong>2 min ago</strong></div></div>
+        </div>
+        <div class="row g-3">
+          <div class="col-lg-7">
+            <div class="panel-card card"><div class="card-body"><h5>Active Remote Sessions</h5><div class="table-responsive"><table class="table"><thead><tr><th>User</th><th>IP Address</th><th>Device</th><th>Login Time</th><th>Action</th></tr></thead><tbody><tr><td>Admin</td><td>197.245.30.15</td><td>Chrome/Win</td><td>10:32 AM</td><td><button class="btn btn-sm btn-outline-danger">Disconnect</button></td></tr><tr><td>Manager</td><td>197.245.30.22</td><td>Safari/iOS</td><td>09:15 AM</td><td><button class="btn btn-sm btn-outline-danger">Disconnect</button></td></tr></tbody></table></div></div></div></div>
+          </div>
+          <div class="col-lg-5">
+            <div class="panel-card card"><div class="card-body"><h5>API Access Keys</h5><div class="table-responsive"><table class="table"><thead><tr><th>Name</th><th>Key</th><th>Status</th></tr></thead><tbody><tr><td>Billing API</td><td><code class="small">p5r_••••••••2f8a</code></td><td><span class="badge-soft-success">Active</span></td></tr><tr><td>Monitoring</td><td><code class="small">p5r_••••••••b4d1</code></td><td><span class="badge-soft-success">Active</span></td></tr><tr><td>Mobile App</td><td><code class="small">p5r_••••••••9e73</code></td><td><span class="badge-soft-success">Active</span></td></tr><tr><td>Testing</td><td><code class="small">p5r_••••••••5c20</code></td><td><span class="badge-soft-muted">Revoked</span></td></tr></tbody></table></div></div></div></div>
+          </div>
+        </div>
+        <div class="mt-3"><button class="btn btn-primary"><i class="bi bi-plus-circle"></i> New Remote Session</button></div>
+      \`;
+    },
+    pppoe() {
+      return \`
+        <div class="toolbar"><h5>PPPoE Users</h5><div class="filters"><button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add User</button><button class="btn btn-outline-secondary"><i class="bi bi-download"></i> Export</button></div></div>
+        <div class="row g-3 mb-3">
+          <div class="col-md-3"><div class="stat-card"><span>Active</span><strong>42</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Disabled</span><strong>5</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Expired</span><strong>3</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Total</span><strong>50</strong></div></div>
+        </div>
+        <div class="panel-card card"><div class="card-body"><div class="table-responsive"><table class="table"><thead><tr><th>Username</th><th>Full Name</th><th>Status</th><th>Speed Profile</th><th>Data Cap</th><th>IP Address</th><th>Expires</th></tr></thead><tbody><tr><td>p-001</td><td>John Mukasa</td><td><span class="badge-soft-success">Active</span></td><td>10 Mbps</td><td>Unlimited</td><td>10.10.0.101</td><td>2026-08-01</td></tr><tr><td>p-002</td><td>Sarah Nakato</td><td><span class="badge-soft-success">Active</span></td><td>5 Mbps</td><td>50 GB</td><td>10.10.0.102</td><td>2026-07-15</td></tr><tr><td>p-003</td><td>Peter Wasswa</td><td><span class="badge-soft-success">Active</span></td><td>2 Mbps</td><td>10 GB</td><td>10.10.0.103</td><td>2026-07-10</td></tr><tr><td>p-004</td><td>Grace Namugga</td><td><span class="badge-soft-warning">Expiring</span></td><td>10 Mbps</td><td>Unlimited</td><td>10.10.0.104</td><td>2026-07-05</td></tr><tr><td>p-005</td><td>Daniel Okello</td><td><span class="badge-soft-muted">Disabled</span></td><td>5 Mbps</td><td>30 GB</td><td>-</td><td>2026-06-01</td></tr></tbody></table></div></div></div></div>
+      \`;
+    },
+    mobileMoney() {
+      return \`
+        <div class="row g-3 mb-3">
+          <div class="col-md-3"><div class="stat-card"><span>Today's Collections</span><strong>UGX 126,000</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>This Week</span><strong>UGX 845,000</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>This Month</span><strong>UGX 2,540,000</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Success Rate</span><strong>97.2%</strong></div></div>
+        </div>
+        <div class="row g-3 mb-3">
+          <div class="col-lg-8">
+            <div class="panel-card card"><div class="card-body"><h5>Recent Transactions</h5><div class="table-responsive"><table class="table"><thead><tr><th>Receipt</th><th>Customer</th><th>Amount</th><th>Provider</th><th>Reference</th><th>Status</th><th>Date</th></tr></thead><tbody><tr><td>MM-2401</td><td>John Mukasa</td><td>UGX 20,000</td><td>MTN MoMo</td><td>MTN-78293</td><td><span class="badge-soft-success">Completed</span></td><td>Today 10:32 AM</td></tr><tr><td>MM-2400</td><td>Sarah Nakato</td><td>UGX 5,000</td><td>Airtel Money</td><td>ATL-45129</td><td><span class="badge-soft-success">Completed</span></td><td>Today 09:15 AM</td></tr><tr><td>MM-2399</td><td>Peter Wasswa</td><td>UGX 1,000</td><td>MTN MoMo</td><td>MTN-78145</td><td><span class="badge-soft-success">Completed</span></td><td>Today 08:45 AM</td></tr><tr><td>MM-2398</td><td>Grace Namugga</td><td>UGX 20,000</td><td>MTN MoMo</td><td>MTN-78012</td><td><span class="badge-soft-success">Completed</span></td><td>Yesterday 04:20 PM</td></tr><tr><td>MM-2397</td><td>Daniel Okello</td><td>UGX 5,000</td><td>Airtel Money</td><td>ATL-45087</td><td><span class="badge-soft-warning">Pending</span></td><td>Yesterday 03:55 PM</td></tr><tr><td>MM-2396</td><td>Stella Acheng</td><td>UGX 1,000</td><td>MTN MoMo</td><td>MTN-77896</td><td><span class="badge-soft-danger">Failed</span></td><td>Yesterday 02:30 PM</td></tr></tbody></table></div></div></div></div>
+          </div>
+          <div class="col-lg-4">
+            <div class="panel-card card mb-3"><div class="card-body"><h5>Provider Breakdown</h5><div class="mb-2 d-flex justify-content-between"><span>MTN MoMo</span><strong class="text-muted">UGX 1,820,000</strong></div><div class="mb-2 d-flex justify-content-between"><span>Airtel Money</span><strong class="text-muted">UGX 720,000</strong></div><hr><div class="d-flex justify-content-between"><span>Total</span><strong>UGX 2,540,000</strong></div></div></div>
+            <div class="panel-card card"><div class="card-body"><h5>Quick Links</h5><button class="btn btn-primary w-100 mb-2"><i class="bi bi-arrow-down-circle"></i> Request Payout</button><button class="btn btn-outline-primary w-100"><i class="bi bi-clock-history"></i> Transaction History</button></div></div>
+          </div>
+        </div>
+      \`;
+    },
+    agents() {
+      return \`
+        <div class="toolbar"><h5>Agent POS Network</h5><div class="filters"><button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Register Agent</button><button class="btn btn-outline-secondary"><i class="bi bi-download"></i> Report</button></div></div>
+        <div class="row g-3 mb-3">
+          <div class="col-md-3"><div class="stat-card"><span>Active Agents</span><strong>8</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Today's Sales</span><strong>UGX 125,000</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Commission Due</span><strong>UGX 12,500</strong></div></div>
+          <div class="col-md-3"><div class="stat-card"><span>Vouchers Sold</span><strong>42</strong></div></div>
+        </div>
+        <div class="panel-card card"><div class="card-body"><div class="table-responsive"><table class="table"><thead><tr><th>Agent Name</th><th>Phone</th><th>Location</th><th>Sales Today</th><th>Commission</th><th>Vouchers</th><th>Status</th></tr></thead><tbody><tr><td><strong>Grace Nalugo</strong></td><td>070 992 8840</td><td>Kireka</td><td>UGX 45,000</td><td>UGX 4,500</td><td>18</td><td><span class="badge-soft-success">Active</span></td></tr><tr><td><strong>Daniel Kato</strong></td><td>070 992 8841</td><td>Bweyogerere</td><td>UGX 32,000</td><td>UGX 3,200</td><td>10</td><td><span class="badge-soft-success">Active</span></td></tr><tr><td><strong>Stella Achieng</strong></td><td>070 992 8842</td><td>Kyambogo</td><td>UGX 48,000</td><td>UGX 4,800</td><td>14</td><td><span class="badge-soft-success">Active</span></td></tr><tr><td><strong>Moses Lwanga</strong></td><td>070 992 8843</td><td>Ntinda</td><td>UGX 0</td><td>UGX 0</td><td>0</td><td><span class="badge-soft-muted">Inactive</span></td></tr></tbody></table></div></div></div></div>
+      \`;
+    },
     captivePortal() {
       const portal = state.settings.captivePortal;
       const canEdit = hasPermission("portal");
@@ -817,18 +912,17 @@
                 <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap mb-3">
                   <div>
                     <h5 class="mb-1">Captive Portal Settings</h5>
-                    <p class="mb-0 text-muted">${canEdit ? "Customize the hotspot login page without editing HTML files." : "Read-only preview. Administrator access is required to modify settings."}</p>
+                    <p class="mb-0 text-muted">Customize your hotspot login page.</p>
                   </div>
                   <a class="btn btn-outline-primary" href="wifi-billing-system.html" target="_blank">Open Portal</a>
                 </div>
                 <form id="portalForm">
-                  ${portalTextInput("Company name", "portalCompanyName", portal.companyName, canEdit)}
-                  ${portalTextInput("Logo text", "portalLogoText", portal.logoText, canEdit)}
-                  ${portalTextInput("Welcome message", "portalWelcome", portal.welcomeMessage, canEdit)}
-                  ${portalTextInput("Login title", "portalLoginTitle", portal.loginTitle, canEdit)}
-                  ${portalTextInput("Login subtitle", "portalLoginSubtitle", portal.loginSubtitle, canEdit)}
-                  ${portalTextInput("Footer text", "portalFooterText", portal.footerText, canEdit)}
                   <div class="row g-3">
+                    <div class="col-md-6">${portalTextInput("Company name", "portalCompanyName", portal.companyName, canEdit)}</div>
+                    <div class="col-md-6">${portalTextInput("Logo text", "portalLogoText", portal.logoText, canEdit)}</div>
+                    <div class="col-md-12">${portalTextInput("Welcome message", "portalWelcome", portal.welcomeMessage, canEdit)}</div>
+                    <div class="col-md-6">${portalTextInput("Login title", "portalLoginTitle", portal.loginTitle, canEdit)}</div>
+                    <div class="col-md-6">${portalTextInput("Login subtitle", "portalLoginSubtitle", portal.loginSubtitle, canEdit)}</div>
                     <div class="col-md-6">${portalTextInput("Contact phone", "portalPhone", portal.contactPhone, canEdit)}</div>
                     <div class="col-md-6">${portalTextInput("WhatsApp number", "portalWhatsapp", portal.whatsapp, canEdit)}</div>
                     <div class="col-md-6">${portalTextInput("Email address", "portalEmail", portal.email, canEdit)}</div>
@@ -836,40 +930,29 @@
                     <div class="col-md-6">${portalTextInput("Facebook link", "portalFacebook", portal.facebook, canEdit)}</div>
                     <div class="col-md-6">${portalTextInput("Instagram link", "portalInstagram", portal.instagram, canEdit)}</div>
                     <div class="col-md-6">${portalTextInput("TikTok link", "portalTiktok", portal.tiktok, canEdit)}</div>
-                    <div class="col-md-6">${portalTextInput("Font family", "portalFont", portal.fontFamily, canEdit)}</div>
+                    <div class="col-md-6">${portalTextInput("Footer text", "portalFooterText", portal.footerText, canEdit)}</div>
                   </div>
-                  <div class="row g-3">
-                    ${portalColorInput("Primary color", "portalPrimary", portal.primaryColor, canEdit)}
-                    ${portalColorInput("Secondary color", "portalSecondary", portal.secondaryColor, canEdit)}
-                    ${portalColorInput("Button color", "portalButton", portal.buttonColor, canEdit)}
+                  <h6 class="mt-3">Theme Colors</h6>
+                  <div class="row g-3 mb-3">
+                    ${portalColorInput("Primary", "portalPrimary", portal.primaryColor, canEdit)}
+                    ${portalColorInput("Background", "portalSecondary", portal.secondaryColor, canEdit)}
+                    ${portalColorInput("Button", "portalButton", portal.buttonColor, canEdit)}
                   </div>
-                  <h6 class="mt-3">Uploads</h6>
-                  <div class="row g-3">
-                    ${portalFileInput("Logo", "portalLogoUpload", canEdit)}
-                    ${portalFileInput("Background image", "portalBgUpload", canEdit)}
-                    ${portalFileInput("Banner image", "portalBannerUpload", canEdit)}
-                    ${portalFileInput("Favicon", "portalFaviconUpload", canEdit)}
-                  </div>
-                  <label class="form-label">Background video URL or data URL</label>
-                  <input class="form-control mb-3" id="portalVideo" value="${escapeHtml(portal.backgroundVideo || "")}" ${canEdit ? "" : "disabled"}>
                   <h6>Login Options</h6>
                   <div class="row g-2 mb-3">
-                    ${portalSwitch("Username login", "portalUsernameLogin", portal.usernameLogin, canEdit)}
                     ${portalSwitch("Voucher login", "portalVoucherLogin", portal.voucherLogin, canEdit)}
+                    ${portalSwitch("Username login", "portalUsernameLogin", portal.usernameLogin, canEdit)}
                     ${portalSwitch("Remember me", "portalRemember", portal.rememberMe, canEdit)}
-                    ${portalSwitch("Terms and Conditions", "portalTerms", portal.terms, canEdit)}
-                    ${portalSwitch("Privacy Policy", "portalPrivacy", portal.privacy, canEdit)}
-                    ${portalSwitch("Password visibility toggle", "portalPasswordToggle", portal.passwordToggle, canEdit)}
+                    ${portalSwitch("Terms & Privacy", "portalTerms", portal.terms, canEdit)}
                   </div>
-                  <h6>Visual Editor</h6>
-                  <label class="form-label">Custom HTML</label>
-                  <textarea class="form-control mb-3 code-editor" id="portalHtml" ${canEdit ? "" : "disabled"}>${escapeHtml(portal.customHtml || "")}</textarea>
-                  <label class="form-label">Custom CSS</label>
-                  <textarea class="form-control mb-3 code-editor" id="portalCss" ${canEdit ? "" : "disabled"}>${escapeHtml(portal.customCss || "")}</textarea>
-                  <label class="form-label">Custom JavaScript</label>
-                  <textarea class="form-control mb-3 code-editor" id="portalJs" ${canEdit ? "" : "disabled"}>${escapeHtml(portal.customJs || "")}</textarea>
-                  <div class="actions">
-                    <button class="btn btn-primary" type="submit" ${canEdit ? "" : "disabled"}>Save Captive Portal</button>
+                  <h6>Uploads</h6>
+                  <div class="row g-3">
+                    ${portalFileInput("Logo image", "portalLogoUpload", canEdit)}
+                    ${portalFileInput("Background image", "portalBgUpload", canEdit)}
+                    ${portalFileInput("Banner image", "portalBannerUpload", canEdit)}
+                  </div>
+                  <div class="actions mt-3">
+                    <button class="btn btn-primary" type="submit" ${canEdit ? "" : "disabled"}>Save Settings</button>
                     <button class="btn btn-outline-secondary" id="portalPreviewRefresh" type="button">Refresh Preview</button>
                   </div>
                 </form>
@@ -879,22 +962,13 @@
           <div class="col-lg-5">
             <div class="panel-card card mb-3">
               <div class="card-body">
-                <h5>Templates</h5>
-                <div class="template-grid mb-3">${Object.keys(PORTAL_TEMPLATES).map((name) => `<button class="btn ${portal.template === name ? "btn-primary" : "btn-outline-secondary"}" data-template="${name}" ${canEdit ? "" : "disabled"}>${name[0].toUpperCase() + name.slice(1)}</button>`).join("")}</div>
-                <h5>Live Preview</h5>
+                <h5>Portal Preview</h5>
                 <div class="btn-group mb-3">
                   <button class="btn btn-outline-secondary" data-preview-size="desktop" type="button">Desktop</button>
                   <button class="btn btn-outline-secondary" data-preview-size="tablet" type="button">Tablet</button>
                   <button class="btn btn-outline-secondary" data-preview-size="mobile" type="button">Mobile</button>
                 </div>
                 <div class="portal-preview-frame desktop" id="portalPreview"></div>
-              </div>
-            </div>
-            <div class="panel-card card">
-              <div class="card-body">
-                <h5>Backups</h5>
-                <p class="text-muted">A backup is created automatically before every save.</p>
-                <div id="portalBackups" class="mini-list">${portalBackupsHtml()}</div>
               </div>
             </div>
           </div>

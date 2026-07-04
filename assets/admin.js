@@ -15,7 +15,7 @@
   function defaultCaptivePortalSettings() {
     return {
       template: "dark",
-      companyName: "PIONIER 5G NET",
+      companyName: "PIONEER 5G NET",
       logoText: "EK",
       logo: "",
       backgroundImage: "",
@@ -23,7 +23,7 @@
       bannerImage: "",
       favicon: "",
       welcomeMessage: "Fast internet access for guests and residents.",
-      loginTitle: "PIONIER 5G NET",
+      loginTitle: "PIONEER 5G NET",
       loginSubtitle: "Select a package or enter your voucher code.",
       footerText: "0709928840",
       contactPhone: "0709928840",
@@ -73,7 +73,7 @@
 
   const defaultState = () => {
     const settings = {
-      companyName: "PIONIER 5G NET",
+      companyName: "PIONEER 5G NET",
       companyLogoText: "EK",
       companyAddress: "Kireka Trading Centre, Kampala, Uganda",
       companyPhone: "0709928840",

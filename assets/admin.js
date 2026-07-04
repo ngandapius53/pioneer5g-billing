@@ -1,6 +1,6 @@
 (() => {
-  const STORE_KEY = "pionierVoucherBillingSystem.v1";
-  const SESSION_KEY = "pionierVoucherBillingSystem.session";
+  const STORE_KEY = "pioneerVoucherBillingSystem.v1";
+  const SESSION_KEY = "pioneerVoucherBillingSystem.session";
   const DATA_VERSION = 2;
   const PAGE_SIZE = 8;
 
@@ -28,11 +28,11 @@
       footerText: "0709928840",
       contactPhone: "0709928840",
       whatsapp: "0709928840",
-      email: "info@pionier5g.net",
-      facebook: "https://facebook.com/pionier5g",
-      instagram: "https://instagram.com/pionier5g",
-      tiktok: "https://tiktok.com/@pionier5g",
-      website: "https://pionier5g.net",
+      email: "info@pioneer5g.net",
+      facebook: "https://facebook.com/pioneer5g",
+      instagram: "https://instagram.com/pioneer5g",
+      tiktok: "https://tiktok.com/@pioneer5g",
+      website: "https://pioneer5g.net",
       primaryColor: "#2fc66f",
       secondaryColor: "#151515",
       buttonColor: "#2fc66f",
@@ -77,7 +77,7 @@
       companyLogoText: "EK",
       companyAddress: "Kireka Trading Centre, Kampala, Uganda",
       companyPhone: "0709928840",
-      companyEmail: "info@pionier5g.net",
+      companyEmail: "info@pioneer5g.net",
       companyTin: "TIN 1049837261",
       receiptFooter: "Keep this receipt. Voucher validity starts on first successful login.",
       currency: "UGX",
@@ -1754,7 +1754,7 @@
   }
 
   function backupData() {
-    download(`pionier-backup-${todayISO()}.json`, JSON.stringify(state, null, 2), "application/json");
+    download(`pioneer-backup-${todayISO()}.json`, JSON.stringify(state, null, 2), "application/json");
     notify("Backup downloaded.", "success");
   }
 

@@ -962,13 +962,8 @@
           <div class="col-lg-5">
             <div class="panel-card card mb-3">
               <div class="card-body">
-                <h5>Portal Preview</h5>
-                <div class="btn-group mb-3">
-                  <button class="btn btn-outline-secondary" data-preview-size="desktop" type="button">Desktop</button>
-                  <button class="btn btn-outline-secondary" data-preview-size="tablet" type="button">Tablet</button>
-                  <button class="btn btn-outline-secondary" data-preview-size="mobile" type="button">Mobile</button>
-                </div>
-                <div class="portal-preview-frame desktop" id="portalPreview"></div>
+                <h5>Preview</h5>
+                <div id="portalPreview"></div>
               </div>
             </div>
           </div>

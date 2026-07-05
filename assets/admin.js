@@ -34,9 +34,9 @@
       instagram: "https://instagram.com/pioneer5g",
       tiktok: "https://tiktok.com/@pioneer5g",
       website: "https://pioneer5g.net",
-      primaryColor: "#6366f1",
+      primaryColor: "#7c3aed",
       secondaryColor: "#1e1b4b",
-      buttonColor: "#6366f1",
+      buttonColor: "#7c3aed",
       fontFamily: "Arial, Helvetica, sans-serif",
       usernameLogin: false,
       voucherLogin: true,
@@ -54,8 +54,8 @@
   const PORTAL_TEMPLATES = {
     modern: { primaryColor: "#2563eb", secondaryColor: "#f8fafc", buttonColor: "#2563eb", fontFamily: "Inter, Arial, sans-serif", welcomeMessage: "Reliable Wi-Fi access in seconds.", loginSubtitle: "Buy a plan, pay securely, and connect instantly." },
     minimal: { primaryColor: "#111827", secondaryColor: "#ffffff", buttonColor: "#111827", fontFamily: "Arial, Helvetica, sans-serif", welcomeMessage: "Simple hotspot access.", loginSubtitle: "Enter voucher or buy a package." },
-    dark: { primaryColor: "#6366f1", secondaryColor: "#1e1b4b", buttonColor: "#6366f1", fontFamily: "Arial, Helvetica, sans-serif", welcomeMessage: "Fast, secure Wi-Fi access.", loginSubtitle: "Select a package and pay with Mobile Money." },
-    light: { primaryColor: "#6366f1", secondaryColor: "#eef2ff", buttonColor: "#6366f1", fontFamily: "Verdana, Arial, sans-serif", welcomeMessage: "Welcome to guest Wi-Fi.", loginSubtitle: "Choose your package to continue." },
+    dark: { primaryColor: "#7c3aed", secondaryColor: "#1e1b4b", buttonColor: "#7c3aed", fontFamily: "Arial, Helvetica, sans-serif", welcomeMessage: "Fast, secure Wi-Fi access.", loginSubtitle: "Select a package and pay with Mobile Money." },
+    light: { primaryColor: "#7c3aed", secondaryColor: "#eef2ff", buttonColor: "#7c3aed", fontFamily: "Verdana, Arial, sans-serif", welcomeMessage: "Welcome to guest Wi-Fi.", loginSubtitle: "Choose your package to continue." },
     glassmorphism: { primaryColor: "#38bdf8", secondaryColor: "rgba(15, 23, 42, .62)", buttonColor: "#38bdf8", fontFamily: "Inter, Arial, sans-serif", welcomeMessage: "Premium wireless access.", loginSubtitle: "A clean portal for instant connectivity." }
   };
 
@@ -1076,7 +1076,7 @@
   }
 
   function portalColorInput(label, id, value, canEdit) {
-    return `<div class="col-md-4"><label class="form-label">${label}</label><input class="form-control form-control-color mb-3" id="${id}" type="color" value="${escapeHtml(value || "#6366f1")}" ${canEdit ? "" : "disabled"}></div>`;
+    return `<div class="col-md-4"><label class="form-label">${label}</label><input class="form-control form-control-color mb-3" id="${id}" type="color" value="${escapeHtml(value || "#7c3aed")}" ${canEdit ? "" : "disabled"}></div>`;
   }
 
   function portalFileInput(label, id, canEdit) {
@@ -1920,10 +1920,10 @@
       drawDonutChart($("#voucherUsageChart"), statusCounts(), ["#2563eb", "#16a34a", "#d97706", "#dc2626"]);
     }
     if (routeName === "routerDashboard") {
-      drawBarChart($("#routerCpuChart"), [42, 28, 18, 35, 22, 31, 15], ["Main", "Office", "Guest", "VPN", "Staff", "IoT", "Backup"], "#6366f1");
+      drawBarChart($("#routerCpuChart"), [42, 28, 18, 35, 22, 31, 15], ["Main", "Office", "Guest", "VPN", "Staff", "IoT", "Backup"], "#7c3aed");
     }
     if (routeName === "bandwidth") {
-      drawBarChart($("#bandwidthChart"), [245, 210, 185, 312, 278, 198, 156, 302, 289, 245, 220, 195, 178, 165, 201, 248, 290, 312, 278, 245, 210, 198, 185, 156], Array.from({length:24},(_,i)=>i+"h"), "#6366f1");
+      drawBarChart($("#bandwidthChart"), [245, 210, 185, 312, 278, 198, 156, 302, 289, 245, 220, 195, 178, 165, 201, 248, 290, 312, 278, 245, 210, 198, 185, 156], Array.from({length:24},(_,i)=>i+"h"), "#7c3aed");
     }
     if (routeName === "reports") {
       drawLineChart($("#salesGraph"), dailySeries().map((item) => item.total), "#2563eb");

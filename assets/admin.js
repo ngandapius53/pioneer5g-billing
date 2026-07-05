@@ -1218,7 +1218,7 @@
       <h4>${escapeHtml(portal.loginTitle)}</h4>
       <p>${escapeHtml(portal.loginSubtitle)}</p>
       ${portal.voucherLogin ? `<div class="portal-preview-field">Enter voucher code</div>` : ""}
-      ${portal.usernameLogin ? `<div class="portal-preview-field">Username</div><div class="portal-preview-field">Password ${portal.passwordToggle ? "👁" : ""}</div>` : ""}
+      ${portal.usernameLogin ? `<div class="portal-preview-field">Username</div><div class="portal-preview-field">Password ${portal.passwordToggle ? "Show" : ""}</div>` : ""}
       <button>${escapeHtml(portal.buttonColor ? "Login" : "Login")}</button>
       <small>${escapeHtml(portal.footerText)}</small>
       <div class="portal-preview-custom">${portal.customHtml || ""}</div>

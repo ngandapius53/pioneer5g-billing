@@ -902,12 +902,12 @@
             <div class="panel-card card"><div class="card-body"><h5>API Access Keys</h5><div class="table-responsive"><table class="table"><thead><tr><th>Name</th><th>Key</th><th>Status</th></tr></thead><tbody><tr><td>Billing API</td><td><code class="small">p5r_••••••••2f8a</code></td><td><span class="badge-soft-success">Active</span></td></tr><tr><td>Monitoring</td><td><code class="small">p5r_••••••••b4d1</code></td><td><span class="badge-soft-success">Active</span></td></tr><tr><td>Mobile App</td><td><code class="small">p5r_••••••••9e73</code></td><td><span class="badge-soft-success">Active</span></td></tr><tr><td>Testing</td><td><code class="small">p5r_••••••••5c20</code></td><td><span class="badge-soft-muted">Revoked</span></td></tr></tbody></table></div></div></div></div>
           </div>
         </div>
-        <div class="mt-3"><button class="btn btn-primary"><i class="bi bi-plus-circle"></i> New Remote Session</button></div>
+        <div class="mt-3"><button class="btn btn-primary" id="newRemoteSessionBtn"><i class="bi bi-plus-circle"></i> New Remote Session</button></div>
       \`;
     },
     pppoe() {
       return \`
-        <div class="toolbar"><h5>PPPoE Users</h5><div class="filters"><button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add User</button><button class="btn btn-outline-secondary"><i class="bi bi-download"></i> Export</button></div></div>
+        <div class="toolbar"><h5>PPPoE Users</h5><div class="filters"><button class="btn btn-primary" id="addPppoeBtn"><i class="bi bi-plus-circle"></i> Add User</button><button class="btn btn-outline-secondary" id="exportPppoeBtn"><i class="bi bi-download"></i> Export</button></div></div>
         <div class="row g-3 mb-3">
           <div class="col-md-3"><div class="stat-card"><span>Active</span><strong>42</strong></div></div>
           <div class="col-md-3"><div class="stat-card"><span>Disabled</span><strong>5</strong></div></div>
@@ -931,14 +931,14 @@
           </div>
           <div class="col-lg-4">
             <div class="panel-card card mb-3"><div class="card-body"><h5>Provider Breakdown</h5><div class="mb-2 d-flex justify-content-between"><span>MTN MoMo</span><strong class="text-muted">UGX 1,820,000</strong></div><div class="mb-2 d-flex justify-content-between"><span>Airtel Money</span><strong class="text-muted">UGX 720,000</strong></div><hr><div class="d-flex justify-content-between"><span>Total</span><strong>UGX 2,540,000</strong></div></div></div>
-            <div class="panel-card card"><div class="card-body"><h5>Quick Links</h5><button class="btn btn-primary w-100 mb-2"><i class="bi bi-arrow-down-circle"></i> Request Payout</button><button class="btn btn-outline-primary w-100"><i class="bi bi-clock-history"></i> Transaction History</button></div></div>
+            <div class="panel-card card"><div class="card-body"><h5>Quick Links</h5><button class="btn btn-primary w-100 mb-2" id="requestPayoutBtn"><i class="bi bi-arrow-down-circle"></i> Request Payout</button><button class="btn btn-outline-primary w-100" id="mmHistoryBtn"><i class="bi bi-clock-history"></i> Transaction History</button></div></div>
           </div>
         </div>
       \`;
     },
     agents() {
       return \`
-        <div class="toolbar"><h5>Agent POS Network</h5><div class="filters"><button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Register Agent</button><button class="btn btn-outline-secondary"><i class="bi bi-download"></i> Report</button></div></div>
+        <div class="toolbar"><h5>Agent POS Network</h5><div class="filters"><button class="btn btn-primary" id="registerAgentBtn"><i class="bi bi-plus-circle"></i> Register Agent</button><button class="btn btn-outline-secondary" id="exportAgentBtn"><i class="bi bi-download"></i> Report</button></div></div>
         <div class="row g-3 mb-3">
           <div class="col-md-3"><div class="stat-card"><span>Active Agents</span><strong>8</strong></div></div>
           <div class="col-md-3"><div class="stat-card"><span>Today's Sales</span><strong>UGX 125,000</strong></div></div>
@@ -1049,6 +1049,22 @@
     if (routeName === "generate") bindGenerateView();
     if (routeName === "billing") bindBillingView();
     if (routeName === "customers") bindCustomerView();
+    if (routeName === "remoteAccess") {
+      $$(".btn-outline-danger").forEach((b) => b.addEventListener("click", () => { if (confirm("Disconnect this session?")) notify("Session disconnected.", "success"); }));
+      listen("#newRemoteSessionBtn", "click", () => notify("Remote session creation form opened.", "success"));
+    }
+    if (routeName === "pppoe") {
+      listen("#addPppoeBtn", "click", () => notify("PPPoE user creation form opened.", "success"));
+      listen("#exportPppoeBtn", "click", () => exportAction("sales-csv"));
+    }
+    if (routeName === "mobileMoney") {
+      listen("#requestPayoutBtn", "click", () => notify("Payout request submitted to provider.", "success"));
+      listen("#mmHistoryBtn", "click", () => notify("Opening transaction history...", "success"));
+    }
+    if (routeName === "agents") {
+      listen("#registerAgentBtn", "click", () => notify("Agent registration form opened.", "success"));
+      listen("#exportAgentBtn", "click", () => exportAction("sales-csv"));
+    }
     if (routeName === "sales") bindSalesView();
     if (routeName === "users") $("#addUserBtn")?.addEventListener("click", () => openUserModal());
     if (routeName === "settings") bindSettingsView();
@@ -1902,6 +1918,12 @@
     if (routeName === "dashboard") {
       drawBarChart($("#dailyRevenueChart"), dailySeries().map((item) => item.total), dailySeries().map((item) => item.label), "#2563eb");
       drawDonutChart($("#voucherUsageChart"), statusCounts(), ["#2563eb", "#16a34a", "#d97706", "#dc2626"]);
+    }
+    if (routeName === "routerDashboard") {
+      drawBarChart($("#routerCpuChart"), [42, 28, 18, 35, 22, 31, 15], ["Main", "Office", "Guest", "VPN", "Staff", "IoT", "Backup"], "#6366f1");
+    }
+    if (routeName === "bandwidth") {
+      drawBarChart($("#bandwidthChart"), [245, 210, 185, 312, 278, 198, 156, 302, 289, 245, 220, 195, 178, 165, 201, 248, 290, 312, 278, 245, 210, 198, 185, 156], Array.from({length:24},(_,i)=>i+"h"), "#6366f1");
     }
     if (routeName === "reports") {
       drawLineChart($("#salesGraph"), dailySeries().map((item) => item.total), "#2563eb");

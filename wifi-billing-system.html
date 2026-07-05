@@ -13,6 +13,7 @@
       --text: #f4f4f4;
       --muted: #a7a7a7;
       --green: #7c3aed;
+
       --green-2: #818cf8;
       --danger: #ff5353;
       --shadow: 0 28px 80px rgba(0, 0, 0, .55);
@@ -26,7 +27,7 @@
       min-height: 100vh;
       color: var(--text);
       background:
-        radial-gradient(circle at top, rgba(47, 198, 111, .09), transparent 32%),
+        radial-gradient(circle at top, rgba(124, 58, 237, .09), transparent 32%),
         var(--bg);
       display: grid;
       place-items: center;
@@ -127,7 +128,7 @@
 
     input:focus {
       border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(47, 198, 111, .15);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, .15);
     }
 
     .buy,
@@ -135,7 +136,7 @@
       min-height: 48px;
       border-radius: 8px;
       background: linear-gradient(135deg, var(--green), var(--green-2));
-      color: #16321f;
+      color: #e8e0ff;
       font-weight: 900;
       font-size: 16px;
     }
@@ -149,8 +150,8 @@
       margin: 0 auto 28px;
       min-height: 35px;
       border-radius: 7px;
-      border: 1px solid rgba(47, 198, 111, .38);
-      background: rgba(47, 198, 111, .05);
+      border: 1px solid rgba(124, 58, 237, .38);
+      background: rgba(124, 58, 237, .05);
       color: var(--green);
       padding: 0 12px;
       font-size: 14px;
@@ -227,8 +228,8 @@
       display: none;
       margin: 18px 0 0;
       border-radius: 8px;
-      border: 1px solid rgba(47, 198, 111, .35);
-      background: rgba(47, 198, 111, .08);
+      border: 1px solid rgba(124, 58, 237, .35);
+      background: rgba(124, 58, 237, .08);
       padding: 14px;
       color: #d7ffe4;
       line-height: 1.45;
@@ -369,7 +370,7 @@
     .method.active {
       border-color: var(--green);
       color: var(--green);
-      background: rgba(47, 198, 111, .08);
+      background: rgba(124, 58, 237, .08);
     }
 
     .modal .login {
@@ -482,8 +483,8 @@
   <script>
     const packages = [
       { name: 'DAILY', duration: '24 Hours', price: 1000 },
-      { name: 'Weekend Special ✌️', duration: '2 Days', price: 2000 },
-      { name: 'WEEKLY #20% OFF# 😉', duration: '7 Days', price: 5000 },
+      { name: 'Weekend Special', duration: '2 Days', price: 2000 },
+      { name: 'WEEKLY (20% OFF)', duration: '7 Days', price: 5000 },
       { name: 'Monthly #25% OFF#', duration: '30 Days', price: 15000 }
     ];
 

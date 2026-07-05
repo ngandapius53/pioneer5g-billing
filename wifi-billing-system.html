@@ -12,8 +12,8 @@
       --line: #343434;
       --text: #f4f4f4;
       --muted: #a7a7a7;
-      --green: #2fc66f;
-      --green-2: #64d56f;
+      --green: #6366f1;
+      --green-2: #818cf8;
       --danger: #ff5353;
       --shadow: 0 28px 80px rgba(0, 0, 0, .55);
       font-family: Arial, Helvetica, sans-serif;
@@ -594,8 +594,8 @@
       }
       if (!portal) return;
       document.title = `${portal.companyName || 'Wi-Fi'} Captive Wi-Fi`;
-      document.documentElement.style.setProperty('--green', portal.primaryColor || '#2fc66f');
-      document.documentElement.style.setProperty('--green-2', portal.buttonColor || portal.primaryColor || '#64d56f');
+      document.documentElement.style.setProperty('--green', portal.primaryColor || '#6366f1');
+      document.documentElement.style.setProperty('--green-2', portal.buttonColor || portal.primaryColor || '#818cf8');
       document.documentElement.style.setProperty('--panel', portal.secondaryColor || '#1d1d1d');
       document.body.style.fontFamily = portal.fontFamily || 'Arial, Helvetica, sans-serif';
       if (portal.backgroundImage) {

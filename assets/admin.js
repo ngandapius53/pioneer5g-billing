@@ -485,6 +485,11 @@
     dashboard() {
       const stats = metrics();
       const planStats = voucherPlanStats();
+      const totCustomers = state.customers.length;
+      const totSales = state.sales.length;
+      const totVouchers = state.vouchers.length;
+      const totUsers = state.users.filter((u) => u.active).length;
+      const last = lastSale();
       return `
         <div class="row g-3 mb-3">
           ${stat("Daily Revenue", money.format(stats.dailyRevenue), "bi-calendar-day")}
@@ -493,19 +498,24 @@
           ${stat("Total Revenue", money.format(stats.totalRevenue), "bi-bank")}
         </div>
         <div class="row g-3 mb-3">
-          ${PLAN_LIBRARY.map((plan) => stat(`${shortPlan(plan)} available`, planStats[plan.key].available, "bi-ticket-perforated")).join("")}
+          ${PLAN_LIBRARY.map((plan) => stat(`${shortPlan(plan)} Available`, planStats[plan.key].available, "bi-ticket-perforated")).join("")}
           ${stat("Expired Vouchers", stats.expiredVouchers, "bi-hourglass-bottom")}
+          ${stat("Active Users", stats.activeUsers, "bi-wifi")}
         </div>
         <div class="row g-3 mb-3">
-          ${stat("Daily sold today", planStats.daily.soldToday, "bi-bag-check")}
-          ${stat("Weekly sold", planStats.weekly.totalSold, "bi-bag-check")}
-          ${stat("Monthly sold", planStats.monthly.totalSold, "bi-bag-check")}
-          ${stat("Active Users", stats.activeUsers, "bi-wifi")}
+          ${stat("Customers", totCustomers, "bi-people")}
+          ${stat("Total Sales", totSales, "bi-receipt")}
+          ${stat("Total Vouchers", totVouchers, "bi-upc-scan")}
+          ${stat("Staff Users", totUsers, "bi-person-badge")}
+        </div>
+        <div class="row g-3 mb-3">
+          ${PLAN_LIBRARY.map((plan) => stat(`${shortPlan(plan)} Sold Today`, planStats[plan.key].soldToday, "bi-bag-check")).join("")}
+          ${PLAN_LIBRARY.length === 3 ? stat("Total Profit", money.format(state.sales.reduce((s, sale) => s + sale.profit, 0)), "bi-graph-up-arrow") : ""}
         </div>
         <div class="row g-3 mb-3">
           <div class="col-lg-8">
             <div class="chart-card">
-              <div class="d-flex justify-content-between align-items-center mb-2"><h5 class="mb-0">Daily Revenue</h5><button class="btn btn-sm btn-outline-primary" data-export-report="daily">Export</button></div>
+              <div class="d-flex justify-content-between align-items-center mb-2"><h5 class="mb-0">Daily Revenue (7 Days)</h5><button class="btn btn-sm btn-outline-primary" data-export-report="daily">Export</button></div>
               <canvas class="chart-canvas" id="dailyRevenueChart"></canvas>
             </div>
           </div>
@@ -520,6 +530,31 @@
         <div class="row g-3">
           <div class="col-lg-7">${recentSalesPanel()}</div>
           <div class="col-lg-5">${bestPlansPanel()}</div>
+        </div>
+        ${last ? `
+        <div class="row g-3 mt-2">
+          <div class="col-12">
+            <div class="panel-card card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                  <div><i class="bi bi-activity me-1 text-primary"></i> <strong>Last Sale:</strong> ${escapeHtml(customerName(last.customerId))} — ${escapeHtml(last.plan)} — ${money.format(last.total)} — ${last.createdAt ? new Date(last.createdAt).toLocaleString() : ""}</div>
+                  <span class="text-muted small">${statusBadge(last.status || "Completed")}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>` : ""}
+        <div class="row g-3 mt-2">
+          <div class="col-12">
+            <div class="panel-card card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                  <div><i class="bi bi-info-circle me-1 text-primary"></i> <strong>PIONEER 5G NET</strong> — Kireka Trading Centre, Kampala — ${money.format(stats.totalRevenue)} total revenue — ${totCustomers} customers — ${totVouchers} vouchers issued</div>
+                  <span class="text-muted small">Updated ${new Date().toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       `;
     },

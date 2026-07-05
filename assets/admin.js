@@ -1,4 +1,5 @@
 (() => {
+  try {
   const STORE_KEY = "pioneerVoucherBillingSystem.v1";
   const SESSION_KEY = "pioneerVoucherBillingSystem.session";
   const DATA_VERSION = 2;
@@ -2274,4 +2275,6 @@
     }).join("");
     return `<svg width="220" height="48" viewBox="0 0 220 48" xmlns="http://www.w3.org/2000/svg"><rect width="220" height="48" fill="#fff"/><g transform="translate(10 3)" fill="#111">${bars}</g><text x="110" y="47" text-anchor="middle" font-size="8" fill="#111">${escapeHtml(text)}</text></svg>`;
   }
+  }
+  catch(e) { console.error("FATAL:", e); document.body.innerHTML = `<div class="alert alert-danger m-5"><h4>Fatal Error</h4><pre>${e.message}\n${e.stack}</pre></div>`; }
 })();

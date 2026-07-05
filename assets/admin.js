@@ -313,8 +313,11 @@
     confirmModal = new bootstrap.Modal($("#confirmModal"));
     bindGlobalEvents();
     applyTheme();
-    if (session?.userId && user()) showApp();
-    else autoLogin();
+    if (!session?.userId || !user()) {
+      session = { userId: "u-admin", loginAt: nowISO() };
+      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    }
+    showApp();
   });
 
   function bindGlobalEvents() {
@@ -340,17 +343,6 @@
     $$(".sidebar .nav-link[data-route]").forEach((button) => {
       button.addEventListener("click", () => route(button.dataset.route));
     });
-  }
-
-  function autoLogin() {
-    const username = $("#loginUsername").value.trim();
-    const password = $("#loginPassword").value;
-    const account = state.users.find((item) => item.username === username && item.password === password && item.active);
-    if (account) {
-      session = { userId: account.id, loginAt: nowISO() };
-      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-      showApp();
-    } else showAuth();
   }
 
   function showAuth() {

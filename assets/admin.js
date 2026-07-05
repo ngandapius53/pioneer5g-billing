@@ -351,11 +351,13 @@
   }
 
   function showApp() {
-    $("#authScreen").classList.add("d-none");
-    $("#appShell").classList.remove("d-none");
-    $("#currentUserLabel").textContent = `${user().name} (${user().role})`;
-    $("#sideCompany").textContent = state.settings.companyName;
-    route(state.currentRoute || "dashboard");
+    try {
+      $("#authScreen").classList.add("d-none");
+      $("#appShell").classList.remove("d-none");
+      $("#currentUserLabel").textContent = `${user().name} (${user().role})`;
+      $("#sideCompany").textContent = state.settings.companyName;
+      route(state.currentRoute || "dashboard");
+    } catch (e) { console.error("showApp error", e); }
   }
 
   function login(event) {
@@ -397,9 +399,11 @@
     const host = $("#viewHost");
     host.classList.add("loading");
     setTimeout(() => {
-      host.innerHTML = views[name] ? views[name]() : views.dashboard();
-      bindRouteEvents(name);
-      drawRouteCharts(name);
+      try {
+        host.innerHTML = views[name] ? views[name]() : views.dashboard();
+        bindRouteEvents(name);
+        drawRouteCharts(name);
+      } catch (e) { console.error("route error", e); host.innerHTML = `<div class="alert alert-danger m-3">Route error: ${e.message}</div>`; }
       host.classList.remove("loading");
     }, 120);
   }

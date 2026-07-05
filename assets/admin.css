@@ -349,6 +349,12 @@ body.dark .eyebrow {
 .stat-card:hover {
   box-shadow: var(--shadow-lg);
 }
+.stat-clickable {
+  cursor: pointer;
+}
+.stat-clickable:active {
+  transform: scale(.97);
+}
 
 .stat-card span {
   display: block;

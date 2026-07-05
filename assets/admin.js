@@ -411,6 +411,13 @@
       } catch (e) { console.error("route error", e); host.innerHTML = `<div class="alert alert-danger m-3">Route error: ${e.message}</div>`; }
       host.classList.remove("loading");
     }, 120);
+    if (!host._routeListener) {
+      host._routeListener = true;
+      host.addEventListener("click", function(e) {
+        const card = e.target.closest("[data-route]");
+        if (card) { route(card.dataset.route); e.stopPropagation(); }
+      });
+    }
   }
 
   function routeTitle(name) {
@@ -493,25 +500,25 @@
       const last = lastSale();
       return `
         <div class="row g-3 mb-3">
-          ${stat("Daily Revenue", money.format(stats.dailyRevenue), "bi-calendar-day")}
-          ${stat("Weekly Revenue", money.format(stats.weeklyRevenue), "bi-calendar-week")}
-          ${stat("Monthly Revenue", money.format(stats.monthlyRevenue), "bi-calendar3")}
-          ${stat("Total Revenue", money.format(stats.totalRevenue), "bi-bank")}
+          ${stat("Daily Revenue", money.format(stats.dailyRevenue), "bi-calendar-day", "daily")}
+          ${stat("Weekly Revenue", money.format(stats.weeklyRevenue), "bi-calendar-week", "weekly")}
+          ${stat("Monthly Revenue", money.format(stats.monthlyRevenue), "bi-calendar3", "monthly")}
+          ${stat("Total Revenue", money.format(stats.totalRevenue), "bi-bank", "sales")}
         </div>
         <div class="row g-3 mb-3">
-          ${PLAN_LIBRARY.map((plan) => stat(`${shortPlan(plan)} Available`, planStats[plan.key].available, "bi-ticket-perforated")).join("")}
-          ${stat("Expired Vouchers", stats.expiredVouchers, "bi-hourglass-bottom")}
-          ${stat("Active Users", stats.activeUsers, "bi-wifi")}
+          ${PLAN_LIBRARY.map((plan) => stat(`${shortPlan(plan)} Available`, planStats[plan.key].available, "bi-ticket-perforated", plan.key)).join("")}
+          ${stat("Expired Vouchers", stats.expiredVouchers, "bi-hourglass-bottom", "vouchers")}
+          ${stat("Active Users", stats.activeUsers, "bi-wifi", "customers")}
         </div>
         <div class="row g-3 mb-3">
-          ${stat("Customers", totCustomers, "bi-people")}
-          ${stat("Total Sales", totSales, "bi-receipt")}
-          ${stat("Total Vouchers", totVouchers, "bi-upc-scan")}
-          ${stat("Staff Users", totUsers, "bi-person-badge")}
+          ${stat("Customers", totCustomers, "bi-people", "customers")}
+          ${stat("Total Sales", totSales, "bi-receipt", "sales")}
+          ${stat("Total Vouchers", totVouchers, "bi-upc-scan", "vouchers")}
+          ${stat("Staff Users", totUsers, "bi-person-badge", "users")}
         </div>
         <div class="row g-3 mb-3">
-          ${PLAN_LIBRARY.map((plan) => stat(`${shortPlan(plan)} Sold Today`, planStats[plan.key].soldToday, "bi-bag-check")).join("")}
-          ${PLAN_LIBRARY.length === 3 ? stat("Total Profit", money.format(state.sales.reduce((s, sale) => s + sale.profit, 0)), "bi-graph-up-arrow") : ""}
+          ${PLAN_LIBRARY.map((plan) => stat(`${shortPlan(plan)} Sold Today`, planStats[plan.key].soldToday, "bi-bag-check", plan.key)).join("")}
+          ${PLAN_LIBRARY.length === 3 ? stat("Total Profit", money.format(state.sales.reduce((s, sale) => s + sale.profit, 0)), "bi-graph-up-arrow", "sales") : ""}
         </div>
         <div class="row g-3 mb-3">
           <div class="col-lg-8">
@@ -1371,8 +1378,8 @@
     });
   }
 
-  function stat(label, value, icon) {
-    return `<div class="col-md-6 col-xl-3"><div class="stat-card"><span><i class="bi ${icon}"></i> ${label}</span><strong>${value}</strong></div></div>`;
+  function stat(label, value, icon, route) {
+    return `<div class="col-md-6 col-xl-3"><div class="stat-card${route ? " stat-clickable" : ""}"${route ? ` data-route="${route}"` : ""}><span><i class="bi ${icon}"></i> ${label}</span><strong>${value}</strong></div></div>`;
   }
 
   function recentSalesPanel() {

@@ -317,7 +317,7 @@
       session = { userId: "u-admin", loginAt: nowISO() };
       localStorage.setItem(SESSION_KEY, JSON.stringify(session));
     }
-    showApp();
+    renderApp();
   });
 
   function bindGlobalEvents() {
@@ -350,14 +350,18 @@
     $("#appShell").classList.add("d-none");
   }
 
-  function showApp() {
+  function renderApp() {
     try {
-      $("#authScreen").classList.add("d-none");
-      $("#appShell").classList.remove("d-none");
       $("#currentUserLabel").textContent = `${user().name} (${user().role})`;
       $("#sideCompany").textContent = state.settings.companyName;
       route(state.currentRoute || "dashboard");
-    } catch (e) { console.error("showApp error", e); }
+    } catch (e) { console.error("renderApp error", e); }
+  }
+
+  function showApp() {
+    $("#authScreen").classList.add("d-none");
+    $("#appShell").classList.remove("d-none");
+    renderApp();
   }
 
   function login(event) {

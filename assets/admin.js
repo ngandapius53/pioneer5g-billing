@@ -310,8 +310,8 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    appModal = new bootstrap.Modal($("#appModal"));
-    confirmModal = new bootstrap.Modal($("#confirmModal"));
+    try { appModal = new bootstrap.Modal($("#appModal")); } catch(e) {}
+    try { confirmModal = new bootstrap.Modal($("#confirmModal")); } catch(e) {}
     bindGlobalEvents();
     applyTheme();
     if (session?.userId && user()) showApp();

@@ -309,15 +309,20 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    appModal = new bootstrap.Modal($("#appModal"));
-    confirmModal = new bootstrap.Modal($("#confirmModal"));
-    bindGlobalEvents();
-    applyTheme();
-    if (!session?.userId || !user()) {
-      session = { userId: "u-admin", loginAt: nowISO() };
-      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    try {
+      appModal = new bootstrap.Modal($("#appModal"));
+      confirmModal = new bootstrap.Modal($("#confirmModal"));
+      bindGlobalEvents();
+      applyTheme();
+      if (!session?.userId || !user()) {
+        session = { userId: "u-admin", loginAt: nowISO() };
+        localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      }
+      renderApp();
+    } catch (e) {
+      console.error("init error", e);
+      document.body.innerHTML = `<div class="alert alert-danger m-5"><h4>Startup Error</h4><pre>${e.message}\n${e.stack}</pre></div>`;
     }
-    renderApp();
   });
 
   function bindGlobalEvents() {

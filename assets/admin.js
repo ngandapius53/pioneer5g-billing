@@ -317,15 +317,14 @@
   });
 
   function bindGlobalEvents() {
-    $("#loginForm").addEventListener("submit", login);
-    $("#logoutBtn").addEventListener("click", logout);
-    $("#resetPasswordBtn").addEventListener("click", resetPassword);
-    $("#themeToggle").addEventListener("click", toggleTheme);
-    $("#backupBtn").addEventListener("click", backupData);
-    $("#quickSellBtn").addEventListener("click", () => route("billing"));
-    $("#generateVoucher").addEventListener("click", () => route("generate"));
-    $("#sidebarToggle").addEventListener("click", () => $(".sidebar").classList.toggle("show"));
-    $("#confirmYes").addEventListener("click", () => {
+    listen("#loginForm", "submit", login);
+    listen("#logoutBtn", "click", logout);
+    listen("#resetPasswordBtn", "click", resetPassword);
+    listen("#themeToggle", "click", toggleTheme);
+    listen("#backupBtn", "click", backupData);
+    listen("#quickSellBtn", "click", () => route("billing"));
+    listen("#sidebarToggle", "click", () => $(".sidebar").classList.toggle("show"));
+    listen("#confirmYes", "click", () => {
       if (pendingConfirm) pendingConfirm();
       confirmModal.hide();
       pendingConfirm = null;
@@ -339,6 +338,11 @@
     $$(".sidebar .nav-link[data-route]").forEach((button) => {
       button.addEventListener("click", () => route(button.dataset.route));
     });
+  }
+
+  function listen(selector, event, handler) {
+    const el = $(selector);
+    if (el) el.addEventListener(event, handler);
   }
 
   function showAuth() {

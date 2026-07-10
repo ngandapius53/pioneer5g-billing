@@ -395,6 +395,7 @@
   }
 
   function route(name) {
+    window._appRoute = route;
     state.currentRoute = name;
     saveState();
     $(".sidebar").classList.remove("show");

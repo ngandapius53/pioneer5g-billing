@@ -149,6 +149,18 @@
   <div id="printHost" class="print-host"></div>
 
   <script>
+  var _route = function(name) {
+    var host = document.getElementById("viewHost");
+    if (host) host.innerHTML = '<div class="p-4 text-center text-muted"><h4>Loading ' + name + '...</h4><p class="small">Please wait while the full interface loads.</p></div>';
+    document.querySelectorAll(".sidebar .nav-link[data-route]").forEach(function(b) { b.classList.toggle("active", b.dataset.route === name); });
+    document.getElementById("pageTitle").textContent = name.charAt(0).toUpperCase() + name.slice(1);
+    document.querySelector(".sidebar").classList.remove("show");
+  };
+  document.addEventListener("click", function(e) {
+    var btn = e.target.closest("[data-route]");
+    if (btn && typeof window._appRoute === "function") { e.preventDefault(); window._appRoute(btn.dataset.route); }
+    else if (btn) { e.preventDefault(); _route(btn.dataset.route); }
+  });
   (function(){
     var loginForm = document.getElementById("loginForm");
     if (loginForm) {
@@ -169,6 +181,7 @@
           try { localStorage.setItem("pioneerVoucherBillingSystem.session", JSON.stringify({ userId: found.id, loginAt: new Date().toISOString() })); } catch(ex) {}
           document.getElementById("authScreen").classList.add("d-none");
           document.getElementById("appShell").classList.remove("d-none");
+          _route("dashboard");
         } else {
           alert("Invalid login. Try: admin / admin123");
         }
@@ -179,6 +192,7 @@
       var ap = document.getElementById("appShell");
       if (as) as.classList.add("d-none");
       if (ap) ap.classList.remove("d-none");
+      _route("dashboard");
     }
   })();
   </script>

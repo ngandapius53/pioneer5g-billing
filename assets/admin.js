@@ -9,7 +9,8 @@
     { key: "daily", name: "Daily Voucher", minutes: 1440, price: 1000, cost: 350, display: "Valid for 24 Hours" },
     { key: "3days", name: "3 Days Voucher", minutes: 4320, price: 3000, cost: 1000, display: "Valid for 3 Days" },
     { key: "weekly", name: "Weekly Voucher", minutes: 10080, price: 5000, cost: 1800, display: "Valid for 7 Days" },
-    { key: "monthly", name: "Monthly Voucher", minutes: 43200, price: 20000, cost: 7000, display: "Valid for 30 Days" }
+    { key: "monthly", name: "Monthly Voucher", minutes: 43200, price: 20000, cost: 7000, display: "Valid for 30 Days" },
+    { key: "3devices", name: "3 Devices", minutes: 43200, price: 55000, cost: 30000, display: "Connect up to 3 Devices" }
   ];
 
   const BULK_AMOUNTS = [10, 20, 50, 100, 500, 1000];
@@ -429,6 +430,7 @@
       dashboard: "Dashboard",
       daily: "Daily Voucher - 1,000 UGX",
       3days: "3 Days Voucher - 3,000 UGX",
+      3devices: "3 Devices - 55,000 UGX",
       weekly: "Weekly Voucher - 5,000 UGX",
       monthly: "Monthly Voucher - 20,000 UGX",
       routerDashboard: "Router Dashboard",

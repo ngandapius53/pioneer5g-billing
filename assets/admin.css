@@ -237,13 +237,14 @@ body.dark {
 
 .sidebar .nav-link.active {
   color: #fff;
-  background: linear-gradient(90deg, rgba(37, 99, 235, .25), var(--blue) 80%);
-  border-left-color: var(--blue);
-  box-shadow: 0 2px 12px rgba(37, 99, 235, .25);
+  background: #2563eb;
+  border-left-color: #60a5fa;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, .4), inset 0 1px 0 rgba(255,255,255,.1);
+  font-weight: 700;
 }
 .sidebar .nav-link.active i { color: #fff; }
 .sidebar .nav-link.active:active {
-  background: linear-gradient(90deg, rgba(29, 78, 216, .25), #1d4ed8 80%);
+  background: #1d4ed8;
 }
 
 .sidebar-card {

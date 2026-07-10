@@ -186,7 +186,8 @@
   }
 
   let state = loadState();
-  let session = JSON.parse(localStorage.getItem(SESSION_KEY) || "null");
+  let session;
+  try { session = JSON.parse(localStorage.getItem(SESSION_KEY) || "null"); } catch(ex) { session = null; }
   let appModal;
   let confirmModal;
   let pendingConfirm = null;
@@ -292,7 +293,7 @@
   }
 
   function saveState() {
-    localStorage.setItem(STORE_KEY, JSON.stringify(state));
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(ex) {}
   }
 
   function user() {
@@ -372,7 +373,7 @@
     const account = state.users.find((item) => item.username === username && item.password === password && item.active);
     if (!account) return notify("Invalid login details or inactive account.", "error");
     session = { userId: account.id, loginAt: nowISO() };
-    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    try { localStorage.setItem(SESSION_KEY, JSON.stringify(session)); } catch(ex) {}
     audit("Login", `${account.username} logged in`);
     notify("Login successful.", "success");
     showApp();

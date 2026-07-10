@@ -419,6 +419,7 @@
       });
     }
   }
+  window._p5route = route;
 
   function routeTitle(name) {
     return {

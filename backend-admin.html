@@ -156,6 +156,20 @@
       if (as) as.classList.add("d-none");
       if (ap) ap.classList.remove("d-none");
     }
+    var lf = document.getElementById("loginForm");
+    if (lf) {
+      lf.addEventListener("submit", function(e) {
+        e.preventDefault();
+        var u = document.getElementById("loginUsername").value.trim();
+        var p = document.getElementById("loginPassword").value;
+        var uid = u === "admin" && p === "admin123" ? "u-admin" : u === "manager" && p === "manager123" ? "u-manager" : u === "cashier" && p === "cashier123" ? "u-cashier" : null;
+        if (!uid) { alert("Invalid login. Try: admin / admin123"); return; }
+        try { localStorage.setItem("pioneerVoucherBillingSystem.session", JSON.stringify({ userId: uid, loginAt: new Date().toISOString() })); } catch(ex) {}
+        document.getElementById("authScreen").classList.add("d-none");
+        document.getElementById("appShell").classList.remove("d-none");
+        if (typeof window._p5route === "function") { window._p5route("dashboard"); }
+      });
+    }
   })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

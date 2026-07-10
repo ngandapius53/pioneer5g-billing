@@ -421,6 +421,7 @@
     }
   }
   window._p5route = route;
+  window._p5nav = function(name) { route(name); };
 
   function routeTitle(name) {
     return {

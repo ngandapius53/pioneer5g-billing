@@ -50,7 +50,7 @@
 
   <div id="appShell" class="app-shell d-none">
     <aside class="sidebar">
-      <div class="brand" data-route="dashboard" style="cursor:pointer">
+      <div class="brand" style="cursor:pointer" onclick="_p5nav('dashboard')">
         <span class="brand-mark">PN</span>
         <div>
           <strong id="sideCompany">PIONEER 5G NET</strong>
@@ -59,37 +59,37 @@
       </div>
 
       <div class="sidebar-group">Dashboards</div>
-      <button class="nav-link active" data-route="dashboard"><i class="bi bi-speedometer2"></i> Main Dashboard</button>
-      <button class="nav-link" data-route="routerDashboard"><i class="bi bi-router"></i> Router Dashboard</button>
-      <button class="nav-link" data-route="bandwidth"><i class="bi bi-activity"></i> Bandwidth</button>
-      <button class="nav-link" data-route="topUsers"><i class="bi bi-trophy"></i> Top Data Users</button>
-      <button class="nav-link" data-route="remoteAccess"><i class="bi bi-cloud-arrow-up"></i> Remote Access</button>
+      <button class="nav-link active" data-route="dashboard" onclick="_p5nav('dashboard')"><i class="bi bi-speedometer2"></i> Main Dashboard</button>
+      <button class="nav-link" data-route="routerDashboard" onclick="_p5nav('routerDashboard')"><i class="bi bi-router"></i> Router Dashboard</button>
+      <button class="nav-link" data-route="bandwidth" onclick="_p5nav('bandwidth')"><i class="bi bi-activity"></i> Bandwidth</button>
+      <button class="nav-link" data-route="topUsers" onclick="_p5nav('topUsers')"><i class="bi bi-trophy"></i> Top Data Users</button>
+      <button class="nav-link" data-route="remoteAccess" onclick="_p5nav('remoteAccess')"><i class="bi bi-cloud-arrow-up"></i> Remote Access</button>
 
       <div class="sidebar-group">Plans & Services</div>
-      <button class="nav-link" data-route="daily"><i class="bi bi-sun"></i> Daily Voucher</button>
-      <button class="nav-link" data-route="weekly"><i class="bi bi-calendar-week"></i> Weekly Voucher</button>
-      <button class="nav-link" data-route="monthly"><i class="bi bi-calendar3"></i> Monthly Voucher</button>
+      <button class="nav-link" data-route="daily" onclick="_p5nav('daily')"><i class="bi bi-sun"></i> Daily Voucher</button>
+      <button class="nav-link" data-route="weekly" onclick="_p5nav('weekly')"><i class="bi bi-calendar-week"></i> Weekly Voucher</button>
+      <button class="nav-link" data-route="monthly" onclick="_p5nav('monthly')"><i class="bi bi-calendar3"></i> Monthly Voucher</button>
 
       <div class="sidebar-group">Billing & Access</div>
-      <button class="nav-link" data-route="generate"><i class="bi bi-plus-square-dotted"></i> Generate Vouchers</button>
-      <button class="nav-link" data-route="vouchers"><i class="bi bi-ticket-perforated"></i> Vouchers</button>
-      <button class="nav-link" data-route="billing"><i class="bi bi-receipt"></i> Billing</button>
-      <button class="nav-link" data-route="pppoe"><i class="bi bi-diagram-3"></i> PPPoE Users</button>
-      <button class="nav-link" data-route="mobileMoney"><i class="bi bi-phone"></i> Mobile Money</button>
-      <button class="nav-link" data-route="agents"><i class="bi bi-person-badge"></i> Agent POS</button>
-      <button class="nav-link" data-route="customers"><i class="bi bi-people"></i> Customers</button>
-      <button class="nav-link" data-route="sales"><i class="bi bi-cash-stack"></i> Sales</button>
-      <button class="nav-link" data-route="reports"><i class="bi bi-bar-chart-line"></i> Reports</button>
+      <button class="nav-link" data-route="generate" onclick="_p5nav('generate')"><i class="bi bi-plus-square-dotted"></i> Generate Vouchers</button>
+      <button class="nav-link" data-route="vouchers" onclick="_p5nav('vouchers')"><i class="bi bi-ticket-perforated"></i> Vouchers</button>
+      <button class="nav-link" data-route="billing" onclick="_p5nav('billing')"><i class="bi bi-receipt"></i> Billing</button>
+      <button class="nav-link" data-route="pppoe" onclick="_p5nav('pppoe')"><i class="bi bi-diagram-3"></i> PPPoE Users</button>
+      <button class="nav-link" data-route="mobileMoney" onclick="_p5nav('mobileMoney')"><i class="bi bi-phone"></i> Mobile Money</button>
+      <button class="nav-link" data-route="agents" onclick="_p5nav('agents')"><i class="bi bi-person-badge"></i> Agent POS</button>
+      <button class="nav-link" data-route="customers" onclick="_p5nav('customers')"><i class="bi bi-people"></i> Customers</button>
+      <button class="nav-link" data-route="sales" onclick="_p5nav('sales')"><i class="bi bi-cash-stack"></i> Sales</button>
+      <button class="nav-link" data-route="reports" onclick="_p5nav('reports')"><i class="bi bi-bar-chart-line"></i> Reports</button>
 
       <div class="sidebar-group">Admin</div>
-      <button class="nav-link" data-route="users"><i class="bi bi-shield-lock"></i> Users</button>
-      <button class="nav-link" data-route="settings"><i class="bi bi-gear"></i> Settings</button>
-      <button class="nav-link" data-route="captivePortal"><i class="bi bi-window-sidebar"></i> Captive Portal</button>
+      <button class="nav-link" data-route="users" onclick="_p5nav('users')"><i class="bi bi-shield-lock"></i> Users</button>
+      <button class="nav-link" data-route="settings" onclick="_p5nav('settings')"><i class="bi bi-gear"></i> Settings</button>
+      <button class="nav-link" data-route="captivePortal" onclick="_p5nav('captivePortal')"><i class="bi bi-window-sidebar"></i> Captive Portal</button>
       <a class="nav-link" href="wifi-billing-system.html"><i class="bi bi-wifi"></i> Captive Portal</a>
 
       <div class="sidebar-card">
         <strong>PIONEER 5G NET</strong>
-        <span data-route="dashboard" style="cursor:pointer">Hotspot Billing, PPPoE, Mobile Money & ISP Automation Platform.</span>
+        <span onclick="_p5nav('dashboard')" style="cursor:pointer">Hotspot Billing, PPPoE, Mobile Money & ISP Automation Platform.</span>
         <span class="sidebar-contact"><i class="bi bi-telephone"></i> 0709928840</span>
       </div>
     </aside>
@@ -98,7 +98,7 @@
       <header class="topbar">
         <div>
           <button class="btn btn-outline-secondary d-lg-none me-2" id="sidebarToggle" type="button"><i class="bi bi-list"></i></button>
-          <span class="eyebrow" data-route="dashboard" style="cursor:pointer">Hotspot Billing System & ISP Automation Platform</span>
+          <span class="eyebrow" onclick="_p5nav('dashboard')" style="cursor:pointer">Hotspot Billing System & ISP Automation Platform</span>
           <h1 id="pageTitle">Dashboard</h1>
         </div>
         <div class="top-actions">
@@ -167,13 +167,9 @@
         try { localStorage.setItem("pioneerVoucherBillingSystem.session", JSON.stringify({ userId: uid, loginAt: new Date().toISOString() })); } catch(ex) {}
         document.getElementById("authScreen").classList.add("d-none");
         document.getElementById("appShell").classList.remove("d-none");
-        if (typeof window._p5route === "function") { window._p5route("dashboard"); }
+        if (typeof window._p5nav === "function") { window._p5nav("dashboard"); }
       });
     }
-    document.addEventListener("click", function(e) {
-      var el = e.target.closest("[data-route]");
-      if (el && typeof window._p5route === "function") { e.preventDefault(); window._p5route(el.dataset.route); }
-    });
   })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

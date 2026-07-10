@@ -50,7 +50,7 @@
 
   <div id="appShell" class="app-shell d-none">
     <aside class="sidebar">
-      <div class="brand">
+      <div class="brand" data-route="dashboard" style="cursor:pointer">
         <span class="brand-mark">PN</span>
         <div>
           <strong id="sideCompany">PIONEER 5G NET</strong>
@@ -89,7 +89,7 @@
 
       <div class="sidebar-card">
         <strong>PIONEER 5G NET</strong>
-        <span>Hotspot Billing, PPPoE, Mobile Money & ISP Automation Platform.</span>
+        <span data-route="dashboard" style="cursor:pointer">Hotspot Billing, PPPoE, Mobile Money & ISP Automation Platform.</span>
         <span class="sidebar-contact"><i class="bi bi-telephone"></i> 0709928840</span>
       </div>
     </aside>
@@ -98,7 +98,7 @@
       <header class="topbar">
         <div>
           <button class="btn btn-outline-secondary d-lg-none me-2" id="sidebarToggle" type="button"><i class="bi bi-list"></i></button>
-          <span class="eyebrow">Hotspot Billing System & ISP Automation Platform</span>
+          <span class="eyebrow" data-route="dashboard" style="cursor:pointer">Hotspot Billing System & ISP Automation Platform</span>
           <h1 id="pageTitle">Dashboard</h1>
         </div>
         <div class="top-actions">
@@ -149,50 +149,27 @@
   <div id="printHost" class="print-host"></div>
 
   <script>
-  var _route = function(name) {
-    var host = document.getElementById("viewHost");
-    if (host) host.innerHTML = '<div class="p-4 text-center text-muted"><h4>Loading ' + name + '...</h4><p class="small">Please wait while the full interface loads.</p></div>';
-    document.querySelectorAll(".sidebar .nav-link[data-route]").forEach(function(b) { b.classList.toggle("active", b.dataset.route === name); });
-    document.getElementById("pageTitle").textContent = name.charAt(0).toUpperCase() + name.slice(1);
-    document.querySelector(".sidebar").classList.remove("show");
-  };
-  document.addEventListener("click", function(e) {
-    var btn = e.target.closest("[data-route]");
-    if (btn && typeof window._appRoute === "function") { e.preventDefault(); window._appRoute(btn.dataset.route); }
-    else if (btn) { e.preventDefault(); _route(btn.dataset.route); }
-  });
   (function(){
+    if (localStorage.getItem("pioneerVoucherBillingSystem.session")) {
+      var as = document.getElementById("authScreen");
+      var ap = document.getElementById("appShell");
+      if (as) as.classList.add("d-none");
+      if (ap) ap.classList.remove("d-none");
+    }
     var loginForm = document.getElementById("loginForm");
     if (loginForm) {
       loginForm.addEventListener("submit", function(e) {
         e.preventDefault();
         var u = document.getElementById("loginUsername").value.trim();
         var p = document.getElementById("loginPassword").value;
-        var users = [
-          { id: "u-admin", username: "admin", password: "admin123" },
-          { id: "u-manager", username: "manager", password: "manager123" },
-          { id: "u-cashier", username: "cashier", password: "cashier123" }
-        ];
-        var found = null;
-        for (var i = 0; i < users.length; i++) {
-          if (users[i].username === u && users[i].password === p) { found = users[i]; break; }
-        }
-        if (found) {
-          try { localStorage.setItem("pioneerVoucherBillingSystem.session", JSON.stringify({ userId: found.id, loginAt: new Date().toISOString() })); } catch(ex) {}
-          document.getElementById("authScreen").classList.add("d-none");
-          document.getElementById("appShell").classList.remove("d-none");
-          _route("dashboard");
+        if ((u === "admin" && p === "admin123") || (u === "manager" && p === "manager123") || (u === "cashier" && p === "cashier123")) {
+          var uid = u === "admin" ? "u-admin" : u === "manager" ? "u-manager" : "u-cashier";
+          try { localStorage.setItem("pioneerVoucherBillingSystem.session", JSON.stringify({ userId: uid, loginAt: new Date().toISOString() })); } catch(ex) {}
+          location.reload();
         } else {
           alert("Invalid login. Try: admin / admin123");
         }
       });
-    }
-    if (localStorage.getItem("pioneerVoucherBillingSystem.session")) {
-      var as = document.getElementById("authScreen");
-      var ap = document.getElementById("appShell");
-      if (as) as.classList.add("d-none");
-      if (ap) ap.classList.remove("d-none");
-      _route("dashboard");
     }
   })();
   </script>

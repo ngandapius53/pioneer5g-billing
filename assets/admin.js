@@ -7,6 +7,7 @@
 
   const PLAN_LIBRARY = [
     { key: "daily", name: "Daily Voucher", minutes: 1440, price: 1000, cost: 350, display: "Valid for 24 Hours" },
+    { key: "3days", name: "3 Days Voucher", minutes: 4320, price: 3000, cost: 1000, display: "Valid for 3 Days" },
     { key: "weekly", name: "Weekly Voucher", minutes: 10080, price: 5000, cost: 1800, display: "Valid for 7 Days" },
     { key: "monthly", name: "Monthly Voucher", minutes: 43200, price: 20000, cost: 7000, display: "Valid for 30 Days" }
   ];
@@ -427,6 +428,7 @@
     return {
       dashboard: "Dashboard",
       daily: "Daily Voucher - 1,000 UGX",
+      3days: "3 Days Voucher - 3,000 UGX",
       weekly: "Weekly Voucher - 5,000 UGX",
       monthly: "Monthly Voucher - 20,000 UGX",
       routerDashboard: "Router Dashboard",
@@ -521,7 +523,7 @@
         </div>
         <div class="row g-3 mb-3">
           ${PLAN_LIBRARY.map((plan) => stat(`${shortPlan(plan)} Sold Today`, planStats[plan.key].soldToday, "bi-bag-check", plan.key)).join("")}
-          ${PLAN_LIBRARY.length === 3 ? stat("Total Profit", money.format(state.sales.reduce((s, sale) => s + sale.profit, 0)), "bi-graph-up-arrow", "sales") : ""}
+          ${stat("Total Profit", money.format(state.sales.reduce((s, sale) => s + sale.profit, 0)), "bi-graph-up-arrow", "sales")}
         </div>
         <div class="row g-3 mb-3">
           <div class="col-lg-8">

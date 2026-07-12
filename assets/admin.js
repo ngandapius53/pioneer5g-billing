@@ -2,7 +2,7 @@
   try {
   const STORE_KEY = "pioneerVoucherBillingSystem.v1";
   const SESSION_KEY = "pioneerVoucherBillingSystem.session";
-  const DATA_VERSION = 2;
+  const DATA_VERSION = 3;
   const PAGE_SIZE = 8;
 
   const PLAN_LIBRARY = [
@@ -241,6 +241,15 @@
 
   function migrate(data) {
     const base = defaultState();
+    if (!data.version || data.version !== DATA_VERSION) {
+      return {
+        ...base,
+        settings: { ...base.settings, ...(data.settings || {}) },
+        users: data.users?.length ? data.users : base.users,
+        customers: data.customers?.length ? data.customers : base.customers,
+        version: DATA_VERSION
+      };
+    }
     const migrated = {
       ...base,
       ...data,

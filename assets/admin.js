@@ -424,6 +424,7 @@
   }
   window._p5route = route;
   window._p5nav = function(name) { route(name); };
+  window.quickSell = function(planKey) { route("billing"); };
 
   function routeTitle(name) {
     return {
@@ -506,6 +507,29 @@
       const totUsers = state.users.filter((u) => u.active).length;
       const last = lastSale();
       return `
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <button class="btn btn-primary" data-route="generate" onclick="_p5nav('generate')"><i class="bi bi-plus-circle"></i> Generate Voucher</button>
+          <button class="btn btn-success" data-route="billing" onclick="_p5nav('billing')"><i class="bi bi-cash-coin"></i> Sell Voucher</button>
+          <button class="btn btn-outline-primary" data-route="customers" onclick="_p5nav('customers')"><i class="bi bi-person-plus"></i> Add Customer</button>
+          <button class="btn btn-outline-secondary" data-export="sales-csv"><i class="bi bi-download"></i> Export</button>
+        </div>
+        <div class="row g-3 mb-3">
+          ${PLAN_LIBRARY.map((plan) => `
+            <div class="col-md-6 col-xl-3">
+              <div class="panel-card card h-100">
+                <div class="card-body">
+                  <span class="eyebrow">${plan.display}</span>
+                  <h5 class="mb-1">${plan.name}</h5>
+                  <h3 class="text-primary mb-2">${money.format(plan.price)}</h3>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-primary flex-fill" data-route="${plan.key}" onclick="_p5nav('${plan.key}')">Manage</button>
+                    <button class="btn btn-outline-success flex-fill" data-quick-sell="${plan.key}" onclick="quickSell('${plan.key}')">Sell</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `).join("")}
+        </div>
         <div class="row g-3 mb-3">
           ${stat("Daily Revenue", money.format(stats.dailyRevenue), "bi-calendar-day", "daily")}
           ${stat("Weekly Revenue", money.format(stats.weeklyRevenue), "bi-calendar-week", "weekly")}

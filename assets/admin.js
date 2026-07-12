@@ -419,6 +419,7 @@
   }
 
   function route(name) {
+    stopAutoRefresh();
     state.currentRoute = name;
     saveState();
     $(".sidebar").classList.remove("show");
@@ -434,6 +435,7 @@
         drawRouteCharts(name);
       } catch (e) { console.error("route error", e); host.innerHTML = `<div class="alert alert-danger m-3">Route error: ${e.message}</div>`; }
       host.classList.remove("loading");
+      if (name === "dashboard") startAutoRefresh();
     }, 120);
     if (!host._routeListener) {
       host._routeListener = true;
@@ -446,6 +448,38 @@
   window._p5route = route;
   window._p5nav = function(name) { route(name); };
   window.quickSell = function(planKey) { route("billing"); };
+
+  let _refreshTimer = null;
+  let _tickerTimer = null;
+  let _lastDashboardRefresh = 0;
+
+  function refreshDashboard() {
+    expireOldVouchers();
+    const host = $("#viewHost");
+    host.classList.add("refreshing");
+    host.innerHTML = views.dashboard();
+    drawRouteCharts("dashboard");
+    _lastDashboardRefresh = Date.now();
+    setTimeout(function() { host.classList.remove("refreshing"); }, 400);
+  }
+
+  function startAutoRefresh() {
+    stopAutoRefresh();
+    _lastDashboardRefresh = Date.now();
+    _refreshTimer = setInterval(refreshDashboard, 30000);
+    _tickerTimer = setInterval(function() {
+      var el = document.getElementById("liveTimestamp");
+      if (el) {
+        var secs = Math.round((Date.now() - _lastDashboardRefresh) / 1000);
+        el.textContent = "Updated " + secs + "s ago";
+      }
+    }, 1000);
+  }
+
+  function stopAutoRefresh() {
+    if (_refreshTimer) { clearInterval(_refreshTimer); _refreshTimer = null; }
+    if (_tickerTimer) { clearInterval(_tickerTimer); _tickerTimer = null; }
+  }
 
   function routeTitle(name) {
     return {
@@ -610,7 +644,7 @@
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                   <div><i class="bi bi-info-circle me-1 text-primary"></i> <strong>PIONEER 5G NET</strong> — Kireka Trading Centre, Kampala — ${money.format(stats.totalRevenue)} total revenue — ${totCustomers} customers — ${totVouchers} vouchers issued</div>
-                  <span class="text-muted small">Updated ${new Date().toLocaleString()}</span>
+                  <span class="text-muted small d-flex align-items-center gap-1"><span class="live-dot"></span> <span id="liveTimestamp">Updated just now</span></span>
                 </div>
               </div>
             </div>

@@ -110,9 +110,15 @@
       buildVoucher("PNR-5A6P-JD8R", PLAN_LIBRARY[1], "Sold", "c-002", addDays(-1), "u-cashier", "BATCH-20260619-WKL"),
       buildVoucher("PNR-R8Q2-LM7C", PLAN_LIBRARY[2], "Used", "c-003", addDays(-12), "u-manager", "BATCH-20260608-MTH"),
       buildVoucher("PNR-XL33-8FNT", PLAN_LIBRARY[2], "Expired", "c-003", addDays(-48), "u-manager", "BATCH-20260503-MTH"),
+      buildVoucher("PNR-3D1-ABC", PLAN_LIBRARY[1], "Sold", "c-002", addDays(-3), "u-cashier", "BATCH-20260617-3DY"),
+      buildVoucher("PNR-3D2-DEF", PLAN_LIBRARY[1], "Sold", "c-005", addDays(-5), "u-cashier", "BATCH-20260615-3DY"),
+      buildVoucher("PNR-DV1-GHI", PLAN_LIBRARY[4], "Sold", "c-001", addDays(-2), "u-admin", "BATCH-20260618-DV"),
+      buildVoucher("PNR-DV2-JKL", PLAN_LIBRARY[4], "Sold", "c-005", addDays(-4), "u-admin", "BATCH-20260616-DV"),
       ...seedAvailable("BATCH-20260620-DLY", PLAN_LIBRARY[0], 18, "D"),
       ...seedAvailable("BATCH-20260619-WKL", PLAN_LIBRARY[1], 9, "W"),
-      ...seedAvailable("BATCH-20260608-MTH", PLAN_LIBRARY[2], 5, "M")
+      ...seedAvailable("BATCH-20260608-MTH", PLAN_LIBRARY[2], 5, "M"),
+      ...seedAvailable("BATCH-20260618-3DY", PLAN_LIBRARY[1], 7, "T"),
+      ...seedAvailable("BATCH-20260618-DV", PLAN_LIBRARY[4], 4, "V")
     ];
 
     const sales = [
@@ -120,7 +126,13 @@
       makeSale("s-002", invoiceFor(addDays(0), 1, "INV"), invoiceFor(addDays(0), 1, "RCP"), "c-004", "PNR-92HF-7YXA", PLAN_LIBRARY[0], "Cash", "u-cashier", addDays(0)),
       makeSale("s-003", invoiceFor(addDays(-1), 2, "INV"), invoiceFor(addDays(-1), 2, "RCP"), "c-002", "PNR-5A6P-JD8R", PLAN_LIBRARY[1], "Mobile Money", "u-cashier", addDays(-1)),
       makeSale("s-004", invoiceFor(addDays(-12), 1, "INV"), invoiceFor(addDays(-12), 1, "RCP"), "c-003", "PNR-R8Q2-LM7C", PLAN_LIBRARY[2], "Card", "u-manager", addDays(-12)),
-      makeSale("s-005", invoiceFor(addDays(-48), 1, "INV"), invoiceFor(addDays(-48), 1, "RCP"), "c-003", "PNR-XL33-8FNT", PLAN_LIBRARY[2], "Mobile Money", "u-manager", addDays(-48))
+      makeSale("s-005", invoiceFor(addDays(-48), 1, "INV"), invoiceFor(addDays(-48), 1, "RCP"), "c-003", "PNR-XL33-8FNT", PLAN_LIBRARY[2], "Mobile Money", "u-manager", addDays(-48)),
+      makeSale("s-006", invoiceFor(addDays(-2), 1, "INV"), invoiceFor(addDays(-2), 1, "RCP"), "c-002", "PNR-3D1-ABC", PLAN_LIBRARY[1], "Mobile Money", "u-cashier", addDays(-2)),
+      makeSale("s-007", invoiceFor(addDays(-3), 1, "INV"), invoiceFor(addDays(-3), 1, "RCP"), "c-005", "PNR-3D2-DEF", PLAN_LIBRARY[1], "Airtel Money", "u-cashier", addDays(-3)),
+      makeSale("s-008", invoiceFor(addDays(-4), 1, "INV"), invoiceFor(addDays(-4), 1, "RCP"), "c-001", "PNR-DV1-GHI", PLAN_LIBRARY[4], "Mobile Money", "u-admin", addDays(-4)),
+      makeSale("s-009", invoiceFor(addDays(-5), 1, "INV"), invoiceFor(addDays(-5), 1, "RCP"), "c-005", "PNR-DV2-JKL", PLAN_LIBRARY[4], "Cash", "u-admin", addDays(-5)),
+      makeSale("s-010", invoiceFor(addDays(-6), 1, "INV"), invoiceFor(addDays(-6), 1, "RCP"), "c-003", "PNR-R8Q2-LM7C", PLAN_LIBRARY[0], "Mobile Money", "u-manager", addDays(-6)),
+      makeSale("s-011", invoiceFor(addDays(-7), 1, "INV"), invoiceFor(addDays(-7), 1, "RCP"), "c-002", "PNR-5A6P-JD8R", PLAN_LIBRARY[1], "Cash", "u-manager", addDays(-7))
     ];
 
     return { version: DATA_VERSION, settings, users, customers, vouchers, sales, audit: [], currentRoute: "dashboard" };

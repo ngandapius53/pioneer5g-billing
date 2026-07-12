@@ -555,6 +555,8 @@
     daily() { return planPage("daily"); },
     weekly() { return planPage("weekly"); },
     monthly() { return planPage("monthly"); },
+    "3days"() { return planPage("3days"); },
+    "3devices"() { return planPage("3devices"); },
     dashboard() {
       const stats = metrics();
       const planStats = voucherPlanStats();
@@ -815,9 +817,13 @@
     },
 
     sales() {
+      const s = metrics();
       return `
         <div class="row g-3 mb-3">
-          ${["daily", "weekly", "monthly", "yearly"].map((range) => stat(`${range} sales`, money.format(salesTotal(range)), "bi-cash")).join("")}
+          ${stat("Today", money.format(salesTotal("daily")), "bi-calendar-day", "dashboard")}
+          ${stat("This Week", money.format(salesTotal("weekly")), "bi-calendar-week", "dashboard")}
+          ${stat("This Month", money.format(salesTotal("monthly")), "bi-calendar3", "dashboard")}
+          ${stat("All Time", money.format(s.totalRevenue), "bi-bank", "dashboard")}
         </div>
         <div class="panel-card card mb-3">
           <div class="card-body toolbar">
@@ -873,7 +879,16 @@
     },
 
     users() {
+      const active = state.users.filter(function(u) { return u.active; }).length;
+      const admins = state.users.filter(function(u) { return u.role === "admin"; }).length;
+      const cashiers = state.users.filter(function(u) { return u.role === "cashier"; }).length;
       return `
+        <div class="row g-3 mb-3">
+          ${stat("Total Staff", state.users.length, "bi-people", "users")}
+          ${stat("Active", active, "bi-person-check", "users")}
+          ${stat("Admins", admins, "bi-shield-lock", "users")}
+          ${stat("Cashiers", cashiers, "bi-person-badge", "users")}
+        </div>
         <div class="panel-card card mb-3">
           <div class="card-body d-flex justify-content-between gap-3 flex-wrap">
             <div><h5>User Management</h5><p class="mb-0 text-muted">Administrator, Manager, and Cashier roles with permissions.</p></div>
@@ -984,10 +999,10 @@
     remoteAccess() {
       return \`
         <div class="row g-3 mb-3">
-          <div class="col-md-3"><div class="stat-card"><span>Active Sessions</span><strong>2</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>API Keys</span><strong>4</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Today's Logins</span><strong>7</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Last Access</span><strong>2 min ago</strong></div></div>
+          ${stat("Active Sessions", "2", "bi-cloud-arrow-up", "remoteAccess")}
+          ${stat("API Keys", "4", "bi-key", "remoteAccess")}
+          ${stat("Today's Logins", "7", "bi-box-arrow-in-right", "remoteAccess")}
+          ${stat("Last Access", "2 min ago", "bi-clock-history", "remoteAccess")}
         </div>
         <div class="row g-3">
           <div class="col-lg-7">
@@ -1004,10 +1019,10 @@
       return \`
         <div class="toolbar"><h5>PPPoE Users</h5><div class="filters"><button class="btn btn-primary" id="addPppoeBtn"><i class="bi bi-plus-circle"></i> Add User</button><button class="btn btn-outline-secondary" id="exportPppoeBtn"><i class="bi bi-download"></i> Export</button></div></div>
         <div class="row g-3 mb-3">
-          <div class="col-md-3"><div class="stat-card"><span>Active</span><strong>42</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Disabled</span><strong>5</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Expired</span><strong>3</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Total</span><strong>50</strong></div></div>
+          ${stat("Active", "42", "bi-check-circle", "")}
+          ${stat("Disabled", "5", "bi-x-circle", "")}
+          ${stat("Expired", "3", "bi-clock", "")}
+          ${stat("Total", "50", "bi-people", "")}
         </div>
         <div class="panel-card card"><div class="card-body"><div class="table-responsive"><table class="table"><thead><tr><th>Username</th><th>Full Name</th><th>Status</th><th>Speed Profile</th><th>Data Cap</th><th>IP Address</th><th>Expires</th></tr></thead><tbody><tr><td>p-001</td><td>John Mukasa</td><td><span class="badge-soft-success">Active</span></td><td>10 Mbps</td><td>Unlimited</td><td>10.10.0.101</td><td>2026-08-01</td></tr><tr><td>p-002</td><td>Sarah Nakato</td><td><span class="badge-soft-success">Active</span></td><td>5 Mbps</td><td>50 GB</td><td>10.10.0.102</td><td>2026-07-15</td></tr><tr><td>p-003</td><td>Peter Wasswa</td><td><span class="badge-soft-success">Active</span></td><td>2 Mbps</td><td>10 GB</td><td>10.10.0.103</td><td>2026-07-10</td></tr><tr><td>p-004</td><td>Grace Namugga</td><td><span class="badge-soft-warning">Expiring</span></td><td>10 Mbps</td><td>Unlimited</td><td>10.10.0.104</td><td>2026-07-05</td></tr><tr><td>p-005</td><td>Daniel Okello</td><td><span class="badge-soft-muted">Disabled</span></td><td>5 Mbps</td><td>30 GB</td><td>-</td><td>2026-06-01</td></tr></tbody></table></div></div></div></div>
       \`;
@@ -1049,10 +1064,10 @@
       return \`
         <div class="toolbar"><h5>Agent POS Network</h5><div class="filters"><button class="btn btn-primary" id="registerAgentBtn"><i class="bi bi-plus-circle"></i> Register Agent</button><button class="btn btn-outline-secondary" id="exportAgentBtn"><i class="bi bi-download"></i> Report</button></div></div>
         <div class="row g-3 mb-3">
-          <div class="col-md-3"><div class="stat-card"><span>Active Agents</span><strong>8</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Today's Sales</span><strong>UGX 125,000</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Commission Due</span><strong>UGX 12,500</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Vouchers Sold</span><strong>42</strong></div></div>
+          ${stat("Active Agents", "8", "bi-person-badge", "")}
+          ${stat("Today's Sales", "UGX 125,000", "bi-cash-stack", "sales")}
+          ${stat("Commission Due", "UGX 12,500", "bi-percent", "")}
+          ${stat("Vouchers Sold", "42", "bi-ticket-perforated", "vouchers")}
         </div>
         <div class="panel-card card"><div class="card-body"><div class="table-responsive"><table class="table"><thead><tr><th>Agent Name</th><th>Phone</th><th>Location</th><th>Sales Today</th><th>Commission</th><th>Vouchers</th><th>Status</th></tr></thead><tbody><tr><td><strong>Grace Nalugo</strong></td><td>070 992 8840</td><td>Kireka</td><td>UGX 45,000</td><td>UGX 4,500</td><td>18</td><td><span class="badge-soft-success">Active</span></td></tr><tr><td><strong>Daniel Kato</strong></td><td>070 992 8841</td><td>Bweyogerere</td><td>UGX 32,000</td><td>UGX 3,200</td><td>10</td><td><span class="badge-soft-success">Active</span></td></tr><tr><td><strong>Stella Achieng</strong></td><td>070 992 8842</td><td>Kyambogo</td><td>UGX 48,000</td><td>UGX 4,800</td><td>14</td><td><span class="badge-soft-success">Active</span></td></tr><tr><td><strong>Moses Lwanga</strong></td><td>070 992 8843</td><td>Ntinda</td><td>UGX 0</td><td>UGX 0</td><td>0</td><td><span class="badge-soft-muted">Inactive</span></td></tr></tbody></table></div></div></div></div>
       \`;

@@ -458,6 +458,7 @@
     const host = $("#viewHost");
     host.classList.add("refreshing");
     host.innerHTML = views.dashboard();
+    bindRouteEvents("dashboard");
     drawRouteCharts("dashboard");
     _lastDashboardRefresh = Date.now();
     setTimeout(function() { host.classList.remove("refreshing"); }, 400);
@@ -942,10 +943,10 @@
     routerDashboard() {
       return \`
         <div class="row g-3 mb-3">
-          <div class="col-md-3"><div class="stat-card"><span>Routers Online</span><strong>3</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Routers Offline</span><strong>0</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Avg CPU Load</span><strong>34%</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Uptime</span><strong>99.8%</strong></div></div>
+          ${stat("Routers Online", "3", "bi-router", "routerDashboard")}
+          ${stat("Routers Offline", "0", "bi-router", "routerDashboard")}
+          ${stat("Avg CPU Load", "34%", "bi-cpu", "routerDashboard")}
+          ${stat("Uptime", "99.8%", "bi-arrow-up-circle", "routerDashboard")}
         </div>
         <div class="row g-3 mb-3">
           <div class="col-lg-8"><div class="chart-card"><h5>Router CPU & Memory Usage</h5><canvas class="chart-canvas" id="routerCpuChart"></canvas></div></div>
@@ -958,10 +959,10 @@
     bandwidth() {
       return \`
         <div class="row g-3 mb-3">
-          <div class="col-md-3"><div class="stat-card"><span>Download</span><strong>245 Mbps</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Upload</span><strong>89 Mbps</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Peak Usage</span><strong>312 Mbps</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Total Today</span><strong>142 GB</strong></div></div>
+          ${stat("Download", "245 Mbps", "bi-arrow-down-circle", "bandwidth")}
+          ${stat("Upload", "89 Mbps", "bi-arrow-up-circle", "bandwidth")}
+          ${stat("Peak Usage", "312 Mbps", "bi-graph-up-arrow", "bandwidth")}
+          ${stat("Total Today", "142 GB", "bi-hdd-stack", "bandwidth")}
         </div>
         <div class="row g-3 mb-3">
           <div class="col-lg-12"><div class="chart-card"><h5>Bandwidth Usage <span class="text-muted small fw-normal">Last 24 hours</span></h5><canvas class="chart-canvas" id="bandwidthChart"></canvas></div></div>
@@ -972,9 +973,9 @@
     topUsers() {
       return \`
         <div class="row g-3 mb-3">
-          <div class="col-md-4"><div class="stat-card"><span>Total Users</span><strong>156</strong></div></div>
-          <div class="col-md-4"><div class="stat-card"><span>Active Today</span><strong>89</strong></div></div>
-          <div class="col-md-4"><div class="stat-card"><span>Total Data Used</span><strong>1.2 TB</strong></div></div>
+          ${stat("Total Users", "156", "bi-people", "customers")}
+          ${stat("Active Today", "89", "bi-person-check", "customers")}
+          ${stat("Total Data Used", "1.2 TB", "bi-hdd-stack", "topUsers")}
         </div>
         <div class="panel-card card"><div class="card-body"><h5>Top Data Users <span class="text-muted small fw-normal">This month</span></h5><div class="table-responsive"><table class="table"><thead><tr><th>#</th><th>Username</th><th>Download</th><th>Upload</th><th>Total</th><th>Plan</th></tr></thead><tbody><tr><td>1</td><td>john.m</td><td>145.2 GB</td><td>32.8 GB</td><td><strong>178.0 GB</strong></td><td>Monthly</td></tr><tr><td>2</td><td>sarah.k</td><td>98.1 GB</td><td>24.4 GB</td><td><strong>122.5 GB</strong></td><td>Monthly</td></tr><tr><td>3</td><td>peter.w</td><td>72.7 GB</td><td>18.2 GB</td><td><strong>90.9 GB</strong></td><td>Weekly</td></tr><tr><td>4</td><td>grace.n</td><td>65.3 GB</td><td>15.1 GB</td><td><strong>80.4 GB</strong></td><td>Monthly</td></tr><tr><td>5</td><td>daniel.k</td><td>58.9 GB</td><td>12.7 GB</td><td><strong>71.6 GB</strong></td><td>Weekly</td></tr><tr><td>6</td><td>stella.a</td><td>51.4 GB</td><td>9.8 GB</td><td><strong>61.2 GB</strong></td><td>Daily</td></tr><tr><td>7</td><td>amos.t</td><td>44.6 GB</td><td>8.3 GB</td><td><strong>52.9 GB</strong></td><td>Weekly</td></tr><tr><td>8</td><td>faith.l</td><td>38.2 GB</td><td>6.5 GB</td><td><strong>44.7 GB</strong></td><td>Daily</td></tr><tr><td>9</td><td>david.o</td><td>32.7 GB</td><td>5.2 GB</td><td><strong>37.9 GB</strong></td><td>Monthly</td></tr><tr><td>10</td><td>esther.a</td><td>28.1 GB</td><td>4.1 GB</td><td><strong>32.2 GB</strong></td><td>Daily</td></tr></tbody></table></div></div></div></div>
       \`;
@@ -1011,20 +1012,34 @@
       \`;
     },
     mobileMoney() {
+      const today = todayISO();
+      const mmSales = state.sales.filter(function(s) { return s.method === "Mobile Money" || s.method === "Airtel Money"; });
+      const todayMM = mmSales.filter(function(s) { return s.createdAt.slice(0,10) === today; });
+      const weekStart = new Date(); weekStart.setDate(weekStart.getDate() - weekStart.getDay()); const wk = weekStart.toISOString().slice(0,10);
+      const weekMM = mmSales.filter(function(s) { return s.createdAt.slice(0,10) >= wk; });
+      const monthMM = mmSales.filter(function(s) { var d = new Date(s.createdAt); return d.getMonth() === new Date().getMonth() && d.getFullYear() === new Date().getFullYear(); });
+      const todayTotal = todayMM.reduce(function(a, b) { return a + b.total; }, 0);
+      const weekTotal = weekMM.reduce(function(a, b) { return a + b.total; }, 0);
+      const monthTotal = monthMM.reduce(function(a, b) { return a + b.total; }, 0);
+      const mtnSales = mmSales.filter(function(s) { return s.method === "Mobile Money"; });
+      const airtelSales = mmSales.filter(function(s) { return s.method === "Airtel Money"; });
+      const mtnTotal = mtnSales.reduce(function(a, b) { return a + b.total; }, 0);
+      const airtelTotal = airtelSales.reduce(function(a, b) { return a + b.total; }, 0);
+      const recent = mmSales.sort(function(a, b) { return b.createdAt.localeCompare(a.createdAt); }).slice(0, 6);
       return \`
         <div class="row g-3 mb-3">
-          <div class="col-md-3"><div class="stat-card"><span>Today's Collections</span><strong>UGX 126,000</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>This Week</span><strong>UGX 845,000</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>This Month</span><strong>UGX 2,540,000</strong></div></div>
-          <div class="col-md-3"><div class="stat-card"><span>Success Rate</span><strong>97.2%</strong></div></div>
+          ${stat("Today's Collections", money.format(todayTotal), "bi-calendar-day", "sales")}
+          ${stat("This Week", money.format(weekTotal), "bi-calendar-week", "sales")}
+          ${stat("This Month", money.format(monthTotal), "bi-calendar3", "sales")}
+          ${stat("Success Rate", mmSales.length ? Math.round(mmSales.filter(function(s) { return true; }).length / mmSales.length * 100) + "%" : "0%", "bi-check-circle", "")}
         </div>
         <div class="row g-3 mb-3">
           <div class="col-lg-8">
-            <div class="panel-card card"><div class="card-body"><h5>Recent Transactions</h5><div class="table-responsive"><table class="table"><thead><tr><th>Receipt</th><th>Customer</th><th>Amount</th><th>Provider</th><th>Reference</th><th>Status</th><th>Date</th></tr></thead><tbody><tr><td>MM-2401</td><td>John Mukasa</td><td>UGX 20,000</td><td>MTN MoMo</td><td>MTN-78293</td><td><span class="badge-soft-success">Completed</span></td><td>Today 10:32 AM</td></tr><tr><td>MM-2400</td><td>Sarah Nakato</td><td>UGX 5,000</td><td>Airtel Money</td><td>ATL-45129</td><td><span class="badge-soft-success">Completed</span></td><td>Today 09:15 AM</td></tr><tr><td>MM-2399</td><td>Peter Wasswa</td><td>UGX 1,000</td><td>MTN MoMo</td><td>MTN-78145</td><td><span class="badge-soft-success">Completed</span></td><td>Today 08:45 AM</td></tr><tr><td>MM-2398</td><td>Grace Namugga</td><td>UGX 20,000</td><td>MTN MoMo</td><td>MTN-78012</td><td><span class="badge-soft-success">Completed</span></td><td>Yesterday 04:20 PM</td></tr><tr><td>MM-2397</td><td>Daniel Okello</td><td>UGX 5,000</td><td>Airtel Money</td><td>ATL-45087</td><td><span class="badge-soft-warning">Pending</span></td><td>Yesterday 03:55 PM</td></tr><tr><td>MM-2396</td><td>Stella Acheng</td><td>UGX 1,000</td><td>MTN MoMo</td><td>MTN-77896</td><td><span class="badge-soft-danger">Failed</span></td><td>Yesterday 02:30 PM</td></tr></tbody></table></div></div></div></div>
+            <div class="panel-card card"><div class="card-body"><h5>Recent Mobile Money Transactions</h5><div class="table-responsive"><table class="table"><thead><tr><th>Receipt</th><th>Customer</th><th>Amount</th><th>Provider</th><th>Status</th><th>Date</th></tr></thead><tbody>${recent.map(function(s) { return '<tr><td>' + s.receiptNo + '</td><td>' + customerName(s.customerId) + '</td><td>' + money.format(s.total) + '</td><td>' + s.method + '</td><td><span class="badge-soft-success">Completed</span></td><td>' + (s.createdAt ? new Date(s.createdAt).toLocaleString() : "") + '</td></tr>'; }).join("") || '<tr><td colspan="6" class="text-muted text-center">No mobile money sales yet</td></tr>'}</tbody></table></div></div></div>
           </div>
           <div class="col-lg-4">
-            <div class="panel-card card mb-3"><div class="card-body"><h5>Provider Breakdown</h5><div class="mb-2 d-flex justify-content-between"><span>MTN MoMo</span><strong class="text-muted">UGX 1,820,000</strong></div><div class="mb-2 d-flex justify-content-between"><span>Airtel Money</span><strong class="text-muted">UGX 720,000</strong></div><hr><div class="d-flex justify-content-between"><span>Total</span><strong>UGX 2,540,000</strong></div></div></div>
-            <div class="panel-card card"><div class="card-body"><h5>Quick Links</h5><button class="btn btn-primary w-100 mb-2" id="requestPayoutBtn"><i class="bi bi-arrow-down-circle"></i> Request Payout</button><button class="btn btn-outline-primary w-100" id="mmHistoryBtn"><i class="bi bi-clock-history"></i> Transaction History</button></div></div>
+            <div class="panel-card card mb-3"><div class="card-body"><h5>Provider Breakdown</h5><div class="mb-2 d-flex justify-content-between"><span>MTN MoMo</span><strong class="text-muted">${money.format(mtnTotal)}</strong></div><div class="mb-2 d-flex justify-content-between"><span>Airtel Money</span><strong class="text-muted">${money.format(airtelTotal)}</strong></div><hr><div class="d-flex justify-content-between"><span>Total</span><strong>${money.format(monthTotal)}</strong></div></div></div>
+            <div class="panel-card card"><div class="card-body"><h5>Quick Links</h5><button class="btn btn-primary w-100 mb-2" onclick="_p5nav('billing')"><i class="bi bi-cash-coin"></i> Record Sale</button><button class="btn btn-outline-primary w-100" onclick="_p5nav('sales')"><i class="bi bi-clock-history"></i> All Transactions</button></div></div>
           </div>
         </div>
       \`;

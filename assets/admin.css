@@ -347,6 +347,28 @@ body.dark .eyebrow {
   background: var(--panel);
   color: var(--ink);
   box-shadow: var(--shadow);
+  transition: box-shadow .2s, transform .15s;
+}
+.panel-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+.panel-card:active {
+  transform: scale(.98);
+}
+.panel-card .btn {
+  min-height: 38px;
+  font-weight: 600;
+  transition: all .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.panel-card .btn:active {
+  transform: scale(.95);
+}
+.panel-card .btn-primary:active {
+  box-shadow: 0 0 0 3px rgba(37,99,235,.3);
+}
+.panel-card .btn-success:active {
+  box-shadow: 0 0 0 3px rgba(22,163,74,.3);
 }
 
 .stat-card {

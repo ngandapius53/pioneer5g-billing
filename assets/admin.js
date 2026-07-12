@@ -454,6 +454,7 @@
   let _lastDashboardRefresh = 0;
 
   function refreshDashboard() {
+    if (state.currentRoute !== "dashboard") return;
     expireOldVouchers();
     const host = $("#viewHost");
     host.classList.add("refreshing");

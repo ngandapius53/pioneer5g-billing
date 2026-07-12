@@ -132,7 +132,9 @@
       makeSale("s-008", invoiceFor(addDays(-4), 1, "INV"), invoiceFor(addDays(-4), 1, "RCP"), "c-001", "PNR-DV1-GHI", PLAN_LIBRARY[4], "Mobile Money", "u-admin", addDays(-4)),
       makeSale("s-009", invoiceFor(addDays(-5), 1, "INV"), invoiceFor(addDays(-5), 1, "RCP"), "c-005", "PNR-DV2-JKL", PLAN_LIBRARY[4], "Cash", "u-admin", addDays(-5)),
       makeSale("s-010", invoiceFor(addDays(-6), 1, "INV"), invoiceFor(addDays(-6), 1, "RCP"), "c-003", "PNR-R8Q2-LM7C", PLAN_LIBRARY[3], "Mobile Money", "u-manager", addDays(-6)),
-      makeSale("s-011", invoiceFor(addDays(-7), 1, "INV"), invoiceFor(addDays(-7), 1, "RCP"), "c-002", "PNR-5A6P-JD8R", PLAN_LIBRARY[2], "Cash", "u-manager", addDays(-7))
+      makeSale("s-011", invoiceFor(addDays(-7), 1, "INV"), invoiceFor(addDays(-7), 1, "RCP"), "c-002", "PNR-5A6P-JD8R", PLAN_LIBRARY[2], "Cash", "u-manager", addDays(-7)),
+      makeSale("s-012", invoiceFor(addDays(0), 2, "INV"), invoiceFor(addDays(0), 2, "RCP"), "c-001", "PNR-47M9-K2QP", PLAN_LIBRARY[0], "Mobile Money", "u-cashier", addDays(0)),
+      makeSale("s-013", invoiceFor(addDays(-1), 3, "INV"), invoiceFor(addDays(-1), 3, "RCP"), "c-004", "PNR-92HF-7YXA", PLAN_LIBRARY[0], "Cash", "u-cashier", addDays(-1))
     ];
 
     return { version: DATA_VERSION, settings, users, customers, vouchers, sales, audit: [], currentRoute: "dashboard" };
@@ -436,6 +438,7 @@
       } catch (e) { console.error("route error", e); host.innerHTML = `<div class="alert alert-danger m-3">Route error: ${e.message}</div>`; }
       host.classList.remove("loading");
       if (name === "dashboard") startAutoRefresh();
+      setTimeout(function() { drawRouteCharts(name); }, 50);
     }, 120);
     if (!host._routeListener) {
       host._routeListener = true;
@@ -463,6 +466,7 @@
     drawRouteCharts("dashboard");
     _lastDashboardRefresh = Date.now();
     setTimeout(function() { host.classList.remove("refreshing"); }, 400);
+    setTimeout(function() { drawRouteCharts("dashboard"); }, 100);
   }
 
   function startAutoRefresh() {
@@ -2133,10 +2137,18 @@
   }
 
   function setupCanvas(canvas) {
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = Math.max(280, rect.width);
-    canvas.height = Math.max(200, rect.height);
-    return canvas.getContext("2d");
+    var w = 400, h = 230;
+    try {
+      var rect = canvas.getBoundingClientRect();
+      if (rect.width > 0) w = rect.width;
+      if (rect.height > 0) h = rect.height;
+    } catch(e) {}
+    canvas.width = Math.max(280, w);
+    canvas.height = Math.max(200, h);
+    var ctx = canvas.getContext("2d");
+    try { var bg = getComputedStyle(canvas).backgroundColor; ctx.fillStyle = bg || "#1a1d23"; } catch(e) { ctx.fillStyle = "#1a1d23"; }
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    return ctx;
   }
 
   function roundRect(ctx, x, y, width, height, radius) {

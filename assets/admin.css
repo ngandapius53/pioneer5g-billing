@@ -449,6 +449,8 @@ body.dark .eyebrow {
   width: 100%;
   height: 230px;
   display: block;
+  background: var(--panel);
+  border-radius: 6px;
 }
 
 .toolbar {

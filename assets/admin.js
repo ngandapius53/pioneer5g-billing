@@ -604,6 +604,7 @@
           ${stat("Expired Vouchers", stats.expiredVouchers, "bi-hourglass-bottom", "vouchers")}
           ${stat("Active Users", stats.activeUsers, "bi-wifi", "customers")}
         </div>
+        <div class="section-divider"><span>Platform Summary</span></div>
         <div class="row g-3 mb-3">
           ${stat("Customers", totCustomers, "bi-people", "customers")}
           ${stat("Total Sales", totSales, "bi-receipt", "sales")}
@@ -614,6 +615,7 @@
           ${PLAN_LIBRARY.map((plan) => stat(`${shortPlan(plan)} Sold Today`, planStats[plan.key].soldToday, "bi-bag-check", plan.key)).join("")}
           ${stat("Total Profit", money.format(state.sales.reduce((s, sale) => s + sale.profit, 0)), "bi-graph-up-arrow", "sales")}
         </div>
+        <div class="section-divider"><span>Analytics</span></div>
         <div class="row g-3 mb-3">
           <div class="col-lg-8">
             <div class="chart-card">

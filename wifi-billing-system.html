@@ -3,93 +3,130 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <link rel="preconnect" href="https://ngandapius53.github.io">
-  <title>PIONEER 5G NET Captive Wi-Fi</title>
+  <title>E-Knox Net Captive Wi-Fi</title>
   <style>
     :root {
-      --bg: #070707;
-      --panel: #1d1d1d;
-      --field: #2a2a2a;
-      --line: #343434;
-      --text: #f4f4f4;
-      --muted: #a7a7a7;
-      --green: #7c3aed;
-
-      --green-2: #818cf8;
-      --danger: #ff5353;
-      --shadow: 0 28px 80px rgba(0, 0, 0, .55);
+      --bg: #050505;
+      --chrome: #181818;
+      --panel: #151515;
+      --card: #1c1c1c;
+      --input: #303030;
+      --line: #303030;
+      --text: #f2f2f2;
+      --muted: #adadad;
+      --green: #28c565;
+      --green-dark: #11a854;
       font-family: Arial, Helvetica, sans-serif;
     }
 
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #000;
       color: var(--text);
-      background:
-        radial-gradient(circle at top, rgba(124, 58, 237, .09), transparent 32%),
-        var(--bg);
+      padding: 18px;
+    }
+    button, input { font: inherit; }
+    button { border: 0; cursor: pointer; }
+
+    .phone {
+      width: min(100%, 414px);
+      height: min(900px, calc(100vh - 28px));
+      border-radius: 30px;
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid #222;
+      box-shadow: 0 28px 80px rgba(0,0,0,.7);
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .chrome {
+      background: var(--chrome);
+      border-bottom: 1px solid #202020;
+    }
+    .status {
+      min-height: 52px;
       display: grid;
       place-items: center;
-      padding: 24px 12px;
+      text-align: center;
+      color: #a8a8a8;
+      font-size: 13px;
+      line-height: 1.35;
+      padding-top: 8px;
+    }
+    .status strong {
+      display: block;
+      color: #dfdfdf;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .nav {
+      height: 70px;
+      display: grid;
+      grid-template-columns: 100px 1fr 58px;
+      align-items: center;
+      padding: 0 12px;
+      border-top: 1px solid rgba(255,255,255,.02);
+    }
+    .arrows {
+      width: 86px;
+      height: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      justify-items: center;
+      border-radius: 999px;
+      background: #1b1b1b;
+      color: #777;
+      font-size: 34px;
+      line-height: 1;
+    }
+    .title {
+      text-align: center;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .close {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      margin-left: auto;
+      border-radius: 50%;
+      border: 1px solid #2b2b2b;
+      color: #f2f2f2;
+      font-size: 34px;
+      line-height: 1;
     }
 
-    button,
-    input {
-      font: inherit;
+    .screen {
+      overflow: auto;
+      padding: 32px 8px 28px;
+      background: #151515;
     }
-
-    button {
-      border: 0;
-      cursor: pointer;
-    }
-
-    .stage {
-      width: min(100%, 440px);
-    }
-
-    .portal-wrap {
-      width: min(100%, 440px);
-      margin: 40px auto;
-    }
-
-    .portal {
-      height: 678px;
-      overflow-y: auto;
-      padding: 28px 18px 28px;
-      scrollbar-width: thin;
-      scrollbar-color: #7b7b7b transparent;
-    }
-
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #171717;
-      padding: 28px 16px 18px;
+    .box {
       min-height: 100%;
+      border: 1px solid #343434;
+      border-radius: 6px;
+      padding: 30px 16px 28px;
+      background: #151515;
     }
 
-    .logo {
-      display: grid;
-      place-items: center;
-      gap: 12px;
+    .brand {
+      text-align: center;
       margin-bottom: 24px;
-      color: var(--green);
-      font-weight: 900;
-      font-size: 24px;
     }
-
     .wifi {
       width: 58px;
-      height: 42px;
+      height: 48px;
+      margin: 0 auto 10px;
       position: relative;
     }
-
     .wifi span {
       position: absolute;
       left: 50%;
@@ -98,600 +135,316 @@
       border-top-color: var(--green);
       border-radius: 50%;
     }
-
-    .wifi span:nth-child(1) { width: 54px; height: 54px; top: 0; }
-    .wifi span:nth-child(2) { width: 38px; height: 38px; top: 10px; }
-    .wifi span:nth-child(3) { width: 20px; height: 20px; top: 20px; }
-    .wifi i {
+    .wifi span:nth-child(1) { width: 56px; height: 56px; top: 0; }
+    .wifi span:nth-child(2) { width: 40px; height: 40px; top: 12px; }
+    .wifi span:nth-child(3) { width: 24px; height: 24px; top: 24px; }
+    .dot {
       position: absolute;
       left: 50%;
-      bottom: 1px;
-      width: 9px;
-      height: 9px;
-      transform: translateX(-50%);
+      bottom: 0;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
+      transform: translateX(-50%);
       background: var(--green);
     }
+    .brand h1 {
+      margin: 0;
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 900;
+    }
 
-    .voucher-login {
+    .voucher {
       display: grid;
       grid-template-columns: 1fr 96px;
       gap: 8px;
-      margin-bottom: 18px;
+      max-width: 362px;
+      margin: 0 auto 20px;
     }
-
     input {
-      width: 100%;
-      min-height: 48px;
-      border: 1px solid #303030;
-      border-radius: 8px;
-      background: var(--field);
-      color: #fff;
+      height: 48px;
+      border: 1px solid #282828;
+      border-radius: 7px;
       padding: 0 16px;
-      outline: none;
+      color: #fff;
+      background: var(--input);
+      outline: 0;
     }
-
-    input:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(124, 58, 237, .15);
-    }
-
+    input::placeholder { color: #b8b8b8; }
+    .login,
     .buy,
-    .login {
-      min-height: 48px;
+    .pay {
+      height: 48px;
       border-radius: 8px;
-      background: linear-gradient(135deg, var(--green), var(--green-2));
-      color: #e8e0ff;
+      background: linear-gradient(180deg, #4fcd6d, var(--green));
+      color: #152217;
       font-weight: 900;
-      font-size: 16px;
+      box-shadow: 0 8px 18px rgba(40,197,101,.2);
     }
 
     .find {
+      min-height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       width: fit-content;
-      margin: 0 auto 28px;
-      min-height: 35px;
+      margin: 0 auto 27px;
+      padding: 0 13px;
       border-radius: 7px;
-      border: 1px solid rgba(124, 58, 237, .38);
-      background: rgba(124, 58, 237, .05);
+      border: 1px solid rgba(40,197,101,.42);
+      background: rgba(40,197,101,.05);
       color: var(--green);
-      padding: 0 12px;
       font-size: 14px;
+      font-weight: 700;
     }
 
     .hint {
+      margin: 0 0 26px;
       text-align: center;
-      color: #c4b5fd;
-      margin: 0 0 24px;
-      font-size: 15px;
+      color: #b7b7b7;
+      font-size: 16px;
     }
 
-    .hint a {
-      color: var(--green);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .hint a:hover {
-      text-decoration: underline;
-    }
-
-    .icon-phone::before {
-      content: "\260E";
-      display: inline-block;
-      margin-right: 6px;
-      font-size: 14px;
-    }
-
-    .packages {
+    .plans {
+      max-width: 362px;
+      margin: 0 auto;
       display: grid;
       gap: 16px;
     }
-
-    .package {
-      display: grid;
-      grid-template-columns: 1fr auto 94px;
-      align-items: center;
-      gap: 12px;
+    .plan {
       min-height: 78px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
+      display: grid;
+      grid-template-columns: 1fr auto 96px;
+      align-items: center;
+      gap: 14px;
       padding: 14px 16px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #1d1d1d;
     }
-
-    .package h3 {
-      margin: 0;
-      font-size: 17px;
-      line-height: 1.05;
-      color: var(--green);
+    .name {
+      color: #efefef;
+      font-size: 18px;
+      line-height: 1.02;
+      font-weight: 900;
     }
-
-    .package small {
+    .name small {
       display: block;
-      color: rgba(124, 58, 237, .7);
       margin-top: 5px;
+      color: #a7a7a7;
       font-size: 13px;
+      font-weight: 700;
     }
-
     .price {
       color: var(--green);
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 900;
       white-space: nowrap;
     }
-
-    .package .buy {
-      width: 94px;
-      min-height: 42px;
+    .buy {
+      height: 44px;
       font-size: 18px;
+      color: #1b271d;
     }
 
-    .notice {
-      display: none;
-      margin: 18px 0 0;
-      border-radius: 8px;
-      border: 1px solid rgba(124, 58, 237, .35);
-      background: rgba(124, 58, 237, .08);
-      padding: 14px;
-      color: #d7ffe4;
-      line-height: 1.45;
-    }
-
-    .notice.show {
-      display: block;
-    }
-
-    .admin-link {
-      display: block;
-      width: fit-content;
-      margin: 20px auto 0;
+    .footer {
+      max-width: 340px;
+      margin: 18px auto 0;
+      text-align: center;
       color: #777;
       font-size: 12px;
-      text-decoration: none;
+      line-height: 1.4;
     }
 
-    .admin-link:hover {
-      color: var(--green);
-    }
-
-    .portal-logo-img {
-      width: 76px;
-      height: 76px;
-      border-radius: 16px;
-      object-fit: cover;
-      display: none;
-    }
-
-    .banner-img {
-      width: 100%;
-      max-height: 150px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 18px;
-      display: none;
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-      font-size: 13px;
-    }
-
-    .social-links a {
-      color: var(--green);
-      text-decoration: none;
-    }
-
-    .terms-row {
-      display: grid;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 12px;
-      margin: 12px 0;
-    }
-
-    .modal-backdrop {
+    .modal-wrap {
       position: fixed;
       inset: 0;
       display: none;
       place-items: center;
-      padding: 16px;
-      background: rgba(0, 0, 0, .72);
-      z-index: 20;
+      padding: 18px;
+      background: rgba(0,0,0,.72);
+      z-index: 10;
     }
-
-    .modal-backdrop.show {
-      display: grid;
-    }
-
+    .modal-wrap.show { display: grid; }
     .modal {
-      width: min(100%, 390px);
+      width: min(100%, 350px);
+      padding: 18px;
       border: 1px solid #333;
-      border-radius: 14px;
+      border-radius: 10px;
       background: #181818;
-      box-shadow: var(--shadow);
-      padding: 20px;
+      box-shadow: 0 22px 60px rgba(0,0,0,.6);
     }
-
-    .modal-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
+    .modal h2 { margin: 0 0 8px; }
+    .modal p {
+      margin: 0 0 12px;
+      color: var(--muted);
     }
-
-    .modal h2 {
-      margin: 0;
-      font-size: 20px;
-      color: var(--green);
-    }
-
-    .close {
-      width: 38px;
-      height: 38px;
-      border-radius: 999px;
-      background: #272727;
-      color: #fff;
-      font-size: 24px;
-    }
-
-    .pay-summary {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 14px;
-      background: #202020;
-      margin-bottom: 14px;
-    }
-
-    .pay-summary span {
-      color: var(--green);
-    }
-    .pay-summary strong {
-      display: block;
-      color: var(--green);
-      margin-top: 6px;
-      font-size: 20px;
-    }
-
-    .methods {
+    .modal input { width: 100%; margin-bottom: 10px; }
+    .modal-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin: 10px 0 14px;
     }
-
-    .method {
-      min-height: 42px;
+    .cancel {
+      height: 48px;
       border-radius: 8px;
-      background: #262626;
-      color: #dcdcdc;
-      border: 1px solid #353535;
-      font-weight: 800;
+      background: #292929;
+      color: #fff;
+      border: 1px solid #3a3a3a;
+      font-weight: 900;
     }
-
-    .method.active {
-      border-color: var(--green);
-      color: var(--green);
-      background: rgba(124, 58, 237, .08);
-    }
-
-    .modal .login {
-      width: 100%;
-      margin-top: 12px;
-    }
-
     .toast {
       position: fixed;
       left: 50%;
-      bottom: 20px;
-      width: min(420px, calc(100vw - 32px));
-      transform: translate(-50%, 12px);
-      border-radius: 10px;
-      background: #101010;
-      border: 1px solid #2d2d2d;
-      color: #fff;
-      padding: 13px 15px;
+      bottom: 18px;
+      width: min(380px, calc(100vw - 28px));
+      transform: translate(-50%, 16px);
       opacity: 0;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: #101010;
+      color: #fff;
+      border: 1px solid #333;
       pointer-events: none;
-      transition: opacity .2s ease, transform .2s ease;
-      z-index: 30;
+      transition: .2s ease;
+      z-index: 20;
     }
-
     .toast.show {
       opacity: 1;
       transform: translate(-50%, 0);
     }
 
-    @media (max-width: 470px) {
+    @media (max-width: 460px) {
       body { padding: 0; align-items: start; }
-      .stage { width: 100%; }
-      .portal-wrap { margin: 0; width: 100%; }
-      .portal { min-height: 100vh; }
-      .package {
-        grid-template-columns: 1fr;
-        align-items: stretch;
+      .phone {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: 0;
       }
-      .package .buy { width: 100%; }
-      .price { font-size: 18px; }
+      .screen { padding: 32px 6px 24px; }
+      .box { padding-left: 10px; padding-right: 10px; }
+      .plan {
+        grid-template-columns: 1fr 108px;
+      }
+      .price { grid-column: 1; }
+      .buy {
+        grid-row: 1 / span 2;
+        grid-column: 2;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="stage">
-    <section class="portal-wrap">
-      <div class="portal">
-        <div class="card">
-          <img class="banner-img" id="portalBanner" alt="">
-          <div class="logo">
-            <img class="portal-logo-img" id="portalLogo" alt="">
-            <div class="wifi" aria-hidden="true"><span></span><span></span><span></span><i></i></div>
-            <div id="portalCompany">PIONEER 5G NET</div>
+  <main class="phone">
+    <header class="chrome">
+      <div class="status">
+        <span>Not Secure - wifi.login</span>
+        <strong>E-KNOX NET_5G</strong>
+      </div>
+      <div class="nav">
+        <div class="arrows"><span>&lsaquo;</span><span>&rsaquo;</span></div>
+        <div class="title">Captive Wi-Fi</div>
+        <div class="close">&times;</div>
+      </div>
+    </header>
+
+    <section class="screen">
+      <div class="box">
+        <div class="brand">
+          <div class="wifi" aria-hidden="true">
+            <span></span><span></span><span></span><i class="dot"></i>
           </div>
-          <p class="hint" id="portalWelcome">Fast internet access for guests and residents.</p>
-
-          <form class="voucher-login" id="voucherForm">
-            <input id="voucherCode" placeholder="Enter your voucher code" autocomplete="off">
-            <button class="login" type="submit">Login</button>
-          </form>
-
-          <form class="form-grid" id="usernameForm" style="display:none;margin-bottom:18px">
-            <input id="usernameInput" placeholder="Username" autocomplete="username">
-            <div style="display:grid;grid-template-columns:1fr 48px;gap:8px">
-              <input id="passwordInput" placeholder="Password" type="password" autocomplete="current-password">
-              <button class="login" id="togglePassword" type="button">Show</button>
-            </div>
-            <label class="terms-row" id="rememberRow"><span><input type="checkbox" id="rememberMe"> Remember me</span></label>
-            <button class="login" type="submit">Login</button>
-          </form>
-
-          <button class="find" id="findVoucher" type="button">⌕ Already bought? Find My Voucher</button>
-          <p class="hint" id="portalSubtitle">Select a package and pay with Mobile Money</p>
-          <div class="terms-row"><span id="termsText">By logging in you accept the Terms and Privacy Policy.</span></div>
-
-          <div class="packages" id="packages"></div>
-          <div class="notice" id="notice"></div>
-          <div class="social-links" id="socialLinks"></div>
-          <p class="hint" id="portalFooter"><i class="icon-phone"></i> <a href="tel:0709928840" id="portalPhoneLink">0709928840</a></p>
-          <a class="admin-link" href="backend-admin.html">Admin backend</a>
+          <h1>E-Knox Net</h1>
         </div>
+
+        <form class="voucher" id="voucherForm">
+          <input id="voucherCode" placeholder="Enter your voucher code" autocomplete="one-time-code">
+          <button class="login" type="submit">Login</button>
+        </form>
+
+        <button class="find" id="findVoucher" type="button">&#9906; Already bought? Find My Voucher</button>
+        <p class="hint">Select a package and pay with Mobile Money</p>
+
+        <div class="plans" id="plans"></div>
+        <p class="footer">For support call or WhatsApp 0702997307</p>
       </div>
     </section>
   </main>
 
-  <div class="modal-backdrop" id="paymentModal" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-head">
-        <h2 id="modalTitle">Buy Package</h2>
-        <button class="close" id="closeModal" type="button" aria-label="Close">×</button>
+  <div class="modal-wrap" id="modal">
+    <div class="modal">
+      <h2 id="modalTitle">Buy Voucher</h2>
+      <p id="modalInfo"></p>
+      <input id="phone" inputmode="tel" placeholder="Mobile Money number">
+      <div class="modal-actions">
+        <button class="cancel" id="cancel" type="button">Cancel</button>
+        <button class="pay" id="pay" type="button">Pay</button>
       </div>
-      <div class="pay-summary">
-        <span id="selectedName">Daily</span>
-        <strong id="selectedPrice">UGX 1,000</strong>
-      </div>
-      <label>
-        Mobile Money Number
-        <input id="phoneNumber" inputmode="tel" placeholder="07XXXXXXXX">
-      </label>
-      <div class="methods">
-        <button class="method active" data-method="MTN" type="button">MTN MoMo</button>
-        <button class="method" data-method="Airtel" type="button">Airtel Money</button>
-      </div>
-      <button class="login" id="payNow" type="button">Pay Now</button>
     </div>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="toast" id="toast"></div>
 
   <script>
     const packages = [
-      { name: 'DAILY', duration: '24 Hours', price: 1000 },
-      { name: '3 DAYS', duration: '3 Days', price: 3000 },
-      { name: 'WEEKLY', duration: '7 Days', price: 5000 },
-      { name: 'MONTHLY', duration: '30 Days', price: 20000 },
-      { name: '3 DEVICES', duration: '3 Devices', price: 55000 }
+      { title: 'DAILY', mark: '&#128293;', time: '24 Hours', price: 1000 },
+      { title: 'Weekend Special', mark: '&#9996;', time: '2 Days', price: 2000 },
+      { title: 'WEEKLY #20% OFF#', mark: '&#128521;', time: '7 Days', price: 5000 },
+      { title: 'Monthly #25% OFF#', mark: '&#11088;', time: '30 Days', price: 20000 }
     ];
 
-    const money = new Intl.NumberFormat('en-UG', {
-      style: 'currency',
-      currency: 'UGX',
-      maximumFractionDigits: 0
-    });
-
-    let selectedPackage = packages[0];
-    let selectedMethod = 'MTN';
-
     const qs = (selector) => document.querySelector(selector);
+    const money = (value) => `UGX ${value.toLocaleString('en-UG')}`;
+    let selected = packages[0];
 
-    function toast(message) {
-      const node = qs('#toast');
-      node.textContent = message;
-      node.classList.add('show');
-      clearTimeout(toast.timer);
-      toast.timer = setTimeout(() => node.classList.remove('show'), 2600);
+    function showToast(message) {
+      qs('#toast').textContent = message;
+      qs('#toast').classList.add('show');
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => qs('#toast').classList.remove('show'), 2400);
     }
 
-    function renderPackages() {
-      qs('#packages').innerHTML = packages.map((item, index) => `
-        <article class="package">
-          <div>
-            <h3>${item.name}</h3>
-            <small>${item.duration}</small>
-          </div>
-          <div class="price">${money.format(item.price)}</div>
-          <button class="buy" data-buy="${index}" type="button">BUY</button>
+    function renderPlans() {
+      qs('#plans').innerHTML = packages.map((plan, index) => `
+        <article class="plan">
+          <div class="name">${plan.title} ${plan.mark}<small>${plan.time}</small></div>
+          <div class="price">${money(plan.price)}</div>
+          <button class="buy" type="button" data-index="${index}">BUY</button>
         </article>
       `).join('');
     }
 
-    function openModal(item) {
-      selectedPackage = item;
-      qs('#selectedName').textContent = `${item.name} - ${item.duration}`;
-      qs('#selectedPrice').textContent = money.format(item.price);
-      qs('#paymentModal').classList.add('show');
-      qs('#paymentModal').setAttribute('aria-hidden', 'false');
-      qs('#phoneNumber').focus();
-    }
-
-    function closeModal() {
-      qs('#paymentModal').classList.remove('show');
-      qs('#paymentModal').setAttribute('aria-hidden', 'true');
-    }
-
-    function showNotice(message) {
-      const notice = qs('#notice');
-      notice.textContent = message;
-      notice.classList.add('show');
-    }
-
     document.addEventListener('click', (event) => {
-      const buyIndex = event.target.dataset.buy;
-      if (buyIndex !== undefined) openModal(packages[Number(buyIndex)]);
-
-      const method = event.target.dataset.method;
-      if (method) {
-        selectedMethod = method;
-        document.querySelectorAll('.method').forEach((button) => button.classList.remove('active'));
-        event.target.classList.add('active');
+      if (event.target.matches('.buy')) {
+        selected = packages[Number(event.target.dataset.index)];
+        qs('#modalTitle').textContent = selected.title;
+        qs('#modalInfo').textContent = `${selected.time} - ${money(selected.price)}`;
+        qs('#modal').classList.add('show');
+        qs('#phone').focus();
       }
+      if (event.target.id === 'modal') qs('#modal').classList.remove('show');
     });
 
+    qs('#cancel').addEventListener('click', () => qs('#modal').classList.remove('show'));
+    qs('#pay').addEventListener('click', () => {
+      const phone = qs('#phone').value.trim();
+      if (!/^0\d{8,9}$/.test(phone)) return showToast('Enter a valid Mobile Money number');
+      const code = 'EKN-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+      qs('#modal').classList.remove('show');
+      showToast(`Payment prompt sent. Voucher: ${code}`);
+    });
     qs('#voucherForm').addEventListener('submit', (event) => {
       event.preventDefault();
       const code = qs('#voucherCode').value.trim();
-      if (!code) {
-        toast('Enter your voucher code first');
-        return;
-      }
-      showNotice(`Voucher ${code.toUpperCase()} accepted. Connecting you to PIONEER 5G NET...`);
-      toast('Login successful');
+      if (!code) return showToast('Enter your voucher code');
+      showToast(`Voucher ${code.toUpperCase()} accepted. Connecting...`);
     });
+    qs('#findVoucher').addEventListener('click', () => showToast('Enter your phone number after tapping BUY.'));
 
-    qs('#findVoucher').addEventListener('click', () => {
-      showNotice('Enter the phone number used for payment in the buy form. Your voucher will be shown after confirmation.');
-    });
-
-    qs('#closeModal').addEventListener('click', closeModal);
-    qs('#paymentModal').addEventListener('click', (event) => {
-      if (event.target.id === 'paymentModal') closeModal();
-    });
-
-    qs('#payNow').addEventListener('click', () => {
-      const phone = qs('#phoneNumber').value.trim();
-      if (!/^0\d{8,9}$/.test(phone)) {
-        toast('Enter a valid Mobile Money number');
-        return;
-      }
-      const voucher = `EK-${Math.random().toString(36).slice(2, 6).toUpperCase()}-${Math.floor(Math.random() * 90 + 10)}`;
-      closeModal();
-      showNotice(`${selectedMethod} payment request sent to ${phone}. Voucher: ${voucher}`);
-      toast(`${selectedPackage.name} selected`);
-    });
-
-    function applyPortalConfig() {
-      const raw = localStorage.getItem('pioneerVoucherBillingSystem.v1');
-      if (!raw) return;
-      let portal;
-      try {
-        portal = JSON.parse(raw).settings?.captivePortal;
-      } catch {
-        return;
-      }
-      if (!portal) return;
-      document.title = `${portal.companyName || 'Wi-Fi'} Captive Wi-Fi`;
-      document.documentElement.style.setProperty('--green', portal.primaryColor || '#7c3aed');
-      document.documentElement.style.setProperty('--green-2', portal.buttonColor || portal.primaryColor || '#818cf8');
-      document.documentElement.style.setProperty('--panel', portal.secondaryColor || '#1d1d1d');
-      document.body.style.fontFamily = portal.fontFamily || 'Arial, Helvetica, sans-serif';
-      if (portal.backgroundImage) {
-        document.body.style.background = `linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.62)), url("${portal.backgroundImage}") center/cover fixed`;
-      }
-      if (portal.backgroundVideo) {
-        const video = document.createElement('video');
-        video.src = portal.backgroundVideo;
-        video.autoplay = true;
-        video.muted = true;
-        video.loop = true;
-        video.playsInline = true;
-        video.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;filter:brightness(.45)';
-        document.body.prepend(video);
-      }
-      qs('#portalCompany').textContent = portal.companyName || 'PIONEER 5G NET';
-      qs('#portalWelcome').textContent = portal.welcomeMessage || '';
-      qs('#portalSubtitle').textContent = portal.loginSubtitle || '';
-      const phone = portal.contactPhone || '0709928840';
-qs('#portalPhoneLink').textContent = phone;
-qs('#portalPhoneLink').href = 'tel:' + phone.replace(/\s/g, '');
-      const logo = qs('#portalLogo');
-      const wifi = document.querySelector('.wifi');
-      if (portal.logo) {
-        logo.src = portal.logo;
-        logo.style.display = 'block';
-        wifi.style.display = 'none';
-      }
-      const banner = qs('#portalBanner');
-      if (portal.bannerImage) {
-        banner.src = portal.bannerImage;
-        banner.style.display = 'block';
-      }
-      qs('#voucherForm').style.display = portal.voucherLogin === false ? 'none' : 'grid';
-      qs('#usernameForm').style.display = portal.usernameLogin ? 'grid' : 'none';
-      qs('#rememberRow').style.display = portal.rememberMe ? 'block' : 'none';
-      qs('#togglePassword').style.display = portal.passwordToggle ? 'block' : 'none';
-      qs('#termsText').style.display = (portal.terms || portal.privacy) ? 'block' : 'none';
-      const links = [
-        ['Phone', portal.contactPhone ? `tel:${portal.contactPhone}` : ''],
-        ['WhatsApp', portal.whatsapp ? `https://wa.me/${portal.whatsapp.replace(/\\D/g, '')}` : ''],
-        ['Email', portal.email ? `mailto:${portal.email}` : ''],
-        ['Facebook', portal.facebook],
-        ['Instagram', portal.instagram],
-        ['TikTok', portal.tiktok],
-        ['Website', portal.website]
-      ].filter((item) => item[1]);
-      qs('#socialLinks').innerHTML = links.map(([label, href]) => `<a href="${href}">${label}</a>`).join('');
-      if (portal.favicon) {
-        const link = document.createElement('link');
-        link.rel = 'icon';
-        link.href = portal.favicon;
-        document.head.appendChild(link);
-      }
-      if (portal.customCss) {
-        const style = document.createElement('style');
-        style.textContent = portal.customCss;
-        document.head.appendChild(style);
-      }
-      if (portal.customHtml) {
-        qs('#notice').insertAdjacentHTML('beforebegin', portal.customHtml);
-      }
-      if (portal.customJs) {
-        try {
-          new Function(portal.customJs)();
-        } catch {
-          console.warn('Custom portal JavaScript failed.');
-        }
-      }
-    }
-
-    qs('#usernameForm').addEventListener('submit', (event) => {
-      event.preventDefault();
-      showNotice('Username login accepted. Connecting you to the hotspot...');
-      toast('Login successful');
-    });
-
-    qs('#togglePassword').addEventListener('click', () => {
-      const input = qs('#passwordInput');
-      input.type = input.type === 'password' ? 'text' : 'password';
-    });
-
-    renderPackages();
-    applyPortalConfig();
+    renderPlans();
   </script>
 </body>
 </html>

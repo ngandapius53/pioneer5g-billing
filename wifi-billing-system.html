@@ -12,14 +12,13 @@
   <style>
     :root {
       --bg: #070707;
-      --panel: #1d1d1d;
-      --field: #2a2a2a;
-      --line: #343434;
+      --panel: #1b1426;
+      --field: #251b33;
+      --line: #3b2b55;
       --text: #f4f4f4;
       --muted: #a7a7a7;
-      --green: #7c3aed;
-
-      --green-2: #818cf8;
+      --green: #8b5cf6;
+      --green-2: #c084fc;
       --danger: #ff5353;
       --shadow: 0 28px 80px rgba(0, 0, 0, .55);
       font-family: Arial, Helvetica, sans-serif;
@@ -32,7 +31,8 @@
       min-height: 100vh;
       color: var(--text);
       background:
-        radial-gradient(circle at top, rgba(124, 58, 237, .09), transparent 32%),
+        radial-gradient(circle at top, rgba(139, 92, 246, .18), transparent 34%),
+        radial-gradient(circle at bottom, rgba(192, 132, 252, .10), transparent 36%),
         var(--bg);
       display: grid;
       place-items: center;
@@ -69,7 +69,7 @@
     .card {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #171717;
+      background: linear-gradient(180deg, #1b1426, #151019);
       padding: 28px 16px 18px;
       min-height: 100%;
     }
@@ -133,7 +133,7 @@
 
     input:focus {
       border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(124, 58, 237, .15);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, .18);
     }
 
     .buy,
@@ -141,7 +141,7 @@
       min-height: 48px;
       border-radius: 8px;
       background: linear-gradient(135deg, var(--green), var(--green-2));
-      color: #e8e0ff;
+      color: #150a22;
       font-weight: 900;
       font-size: 16px;
     }
@@ -155,8 +155,8 @@
       margin: 0 auto 28px;
       min-height: 35px;
       border-radius: 7px;
-      border: 1px solid rgba(124, 58, 237, .38);
-      background: rgba(124, 58, 237, .05);
+      border: 1px solid rgba(139, 92, 246, .48);
+      background: rgba(139, 92, 246, .08);
       color: var(--green);
       padding: 0 12px;
       font-size: 14px;
@@ -164,7 +164,7 @@
 
     .hint {
       text-align: center;
-      color: #c4b5fd;
+      color: #d8b4fe;
       margin: 0 0 24px;
       font-size: 15px;
     }
@@ -212,7 +212,7 @@
 
     .package small {
       display: block;
-      color: rgba(124, 58, 237, .7);
+      color: rgba(216, 180, 254, .72);
       margin-top: 5px;
       font-size: 13px;
     }
@@ -234,8 +234,8 @@
       display: none;
       margin: 18px 0 0;
       border-radius: 8px;
-      border: 1px solid rgba(124, 58, 237, .35);
-      background: rgba(124, 58, 237, .08);
+      border: 1px solid rgba(139, 92, 246, .42);
+      background: rgba(139, 92, 246, .10);
       padding: 14px;
       color: #d7ffe4;
       line-height: 1.45;
@@ -315,7 +315,7 @@
       width: min(100%, 390px);
       border: 1px solid #333;
       border-radius: 14px;
-      background: #181818;
+      background: #1b1426;
       box-shadow: var(--shadow);
       padding: 20px;
     }
@@ -347,7 +347,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 14px;
-      background: #202020;
+      background: #21162f;
       margin-bottom: 14px;
     }
 
@@ -380,7 +380,7 @@
     .method.active {
       border-color: var(--green);
       color: var(--green);
-      background: rgba(124, 58, 237, .08);
+      background: rgba(139, 92, 246, .10);
     }
 
     .modal .login {
@@ -606,9 +606,9 @@
       }
       if (!portal) return;
       document.title = `${portal.companyName || 'Wi-Fi'} Captive Wi-Fi`;
-      document.documentElement.style.setProperty('--green', portal.primaryColor || '#7c3aed');
-      document.documentElement.style.setProperty('--green-2', portal.buttonColor || portal.primaryColor || '#818cf8');
-      document.documentElement.style.setProperty('--panel', portal.secondaryColor || '#1d1d1d');
+      document.documentElement.style.setProperty('--green', '#8b5cf6');
+      document.documentElement.style.setProperty('--green-2', '#c084fc');
+      document.documentElement.style.setProperty('--panel', '#1b1426');
       document.body.style.fontFamily = portal.fontFamily || 'Arial, Helvetica, sans-serif';
       if (portal.backgroundImage) {
         document.body.style.background = `linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.62)), url("${portal.backgroundImage}") center/cover fixed`;
